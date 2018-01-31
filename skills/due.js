@@ -32,7 +32,7 @@ function handel(controller, bot, message, method) {
     var person = message.original_message.personId;
     controller.storage.users.get(person, function(err, user) {
         if (!user) {
-            bot.reply(message, "Sorry. We don't share a classroom!");
+            bot.reply(message, "Sorry. Nós não estamos em uma sala de aula!");
             return;
         }
 
@@ -48,7 +48,7 @@ function handel(controller, bot, message, method) {
         bot.startConversation(message, function(err,convo) {
 
             var choice = "";
-            choice += "For which class?  \nReply with the number i.e. `1`, `2` etc. or `quit` to abort  \n  \n";
+            choice += "De qual classe?  \nReply with the number i.e. `1`, `2` etc. or `quit` to abort  \n  \n";
             for(var idy= 0; idy<rooms.length; idy++) {
                 choice += (idy+1) + ". " + rooms[idy].title +"  \n";
             }
