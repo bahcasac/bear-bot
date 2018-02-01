@@ -32,7 +32,7 @@ function handel(controller, bot, message, method) {
     var person = message.original_message.personId;
     controller.storage.users.get(person, function(err, user) {
         if (!user) {
-            bot.reply(message, "Sorry. Nós não estamos em uma sala de aula!");
+            bot.reply(message, "Desculpe. Nós não estamos em uma sala de aula!");
             return;
         }
 

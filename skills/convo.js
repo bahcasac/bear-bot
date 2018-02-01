@@ -23,15 +23,15 @@ module.exports = function(controller) {
                 // assuming data is not in my db ->
                 // save the room data marked as inactive, save persons in the room
 
-                bot.reply(message, 'Hello 👋  \nI am Bear, the classroom bot!  \n'
-                    + 'Type `hi` in a **direct message** to talk to me');
+                bot.reply(message, 'Olá 👋  \nI sou o Bear, um bot de sala de aula!  \n'
+                    + 'Digite `Oi`  em uma **mensagem direta** para falar comigo');
 
                 var creatorId = details.creatorId;
                 var title = details.title;
 
                 roomAPI.getRoomMembers(roomId, function (err, members) {
                     if (err) {
-                        console.error(TAG+ "roomAPI.getRoomMembers not working");
+                        console.error(TAG+ "roomAPI.getRoomMembers não funciona");
                         return;
                     }
 
@@ -126,8 +126,8 @@ module.exports = function(controller) {
             }
             if (details.type === "group") {
 
-                bot.reply(message, 'Hello, <@personId:'+newcomerId+'|'+name+'> 👋  \n'
-                    + 'Type `hi` in a **direct message** to talk to me');
+                bot.reply(message, 'Olá, <@personId:'+newcomerId+'|'+name+'> 👋  \n'
+                    + 'Digite `hi` em uma **mensagem direta** para falar comigo');
 
                 // save user
                 controller.storage.users.get(newcomerId, function (err, user) {
@@ -157,7 +157,7 @@ module.exports = function(controller) {
                         room.details.members.push({id: newcomerId, personEmail: personEmail, personDisplayName: name, teacher: false});
 
                         controller.storage.channels.save(room, function (err, id) {
-                            if (err) console.error(TAG+ "controller.storage.channels.save not working");
+                            if (err) console.error(TAG+ "controller.storage.channels.save não está funcionando");
                         });
                     }
                 });

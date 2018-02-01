@@ -6,21 +6,21 @@ const TAG = "meha, news.js: ";
 var Util = require("../components/util.js");
 
 module.exports = function(controller) {
-    controller.hears(['add news', 'set news'], 'direct_message', function(bot, message) {
+    controller.hears(['adicionar notícias', 'enviar notícias'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "SET");
     });
 
 
-    controller.hears(['update news', 'edit news'], 'direct_message', function(bot, message) {
+    controller.hears(['atualizar notícias', 'editar notícias'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "EDIT");
     });
 
-    controller.hears(['delete news'], 'direct_message', function(bot, message) {
+    controller.hears(['deletar notícias'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "DELETE");
     });
 
 
-    controller.hears(['news'], 'direct_message', function(bot, message) {
+    controller.hears(['notícias'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "GET");
     });
 

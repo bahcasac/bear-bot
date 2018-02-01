@@ -6,21 +6,21 @@ const TAG = "meha, exam.js: ";
 var Util = require("../components/util.js");
 
 module.exports = function(controller) {
-    controller.hears(['add exam', 'set exam'], 'direct_message', function(bot, message) {
+    controller.hears(['adicionar exame', 'enviar exame'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "SET");
     });
 
 
-    controller.hears(['update exam', 'edit exam'], 'direct_message', function(bot, message) {
+    controller.hears(['atualizar exame', 'editar exame'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "EDIT");
     });
 
-    controller.hears(['delete exam'], 'direct_message', function(bot, message) {
+    controller.hears(['deletar exame'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "DELETE");
     });
 
 
-    controller.hears(['exam'], 'direct_message', function(bot, message) {
+    controller.hears(['exame'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "GET");
     });
 
@@ -32,7 +32,7 @@ function handel(controller, bot, message, method) {
     var person = message.original_message.personId;
     controller.storage.users.get(person, function(err, user) {
         if (!user) {
-            bot.reply(message, "Sorry. We don't share a classroom!");
+            bot.reply(message, "Desculpe. Nós não compartilhamos uma sala de aula!");
             return;
         }
 
@@ -48,16 +48,16 @@ function handel(controller, bot, message, method) {
         bot.startConversation(message, function(err,convo) {
 
             var choice = "";
-            choice += "For which class?  \nReply with the number i.e. `1`, `2` etc. or `quit` to abort  \n  \n";
+            choice += " Para qual sala?  \n Repetir com o número `1`, `2` etc. ou `sair` para cancelar  \n  \n";
             for(var idy= 0; idy<rooms.length; idy++) {
                 choice += (idy+1) + ". " + rooms[idy].title +"  \n";
             }
 
             convo.addQuestion(choice,[
                 {
-                    pattern: 'quit',
+                    pattern: 'sair',
                     callback: function(response,convo) {
-                        convo.say('Aborted');
+                        convo.say('Cancelada');
                         convo.next();
                     }
                 },

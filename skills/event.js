@@ -6,21 +6,21 @@ const TAG = "meha, event.js: ";
 var Util = require("../components/util.js");
 
 module.exports = function(controller) {
-    controller.hears(['add event', 'set event'], 'direct_message', function(bot, message) {
+    controller.hears(['adicionar evento', 'enviar evento'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "SET");
     });
 
 
-    controller.hears(['update event', 'edit event'], 'direct_message', function(bot, message) {
+    controller.hears(['atualizar evento', 'editar evento'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "EDIT");
     });
 
-    controller.hears(['delete event'], 'direct_message', function(bot, message) {
+    controller.hears(['deletar evento'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "DELETE");
     });
 
 
-    controller.hears(['event'], 'direct_message', function(bot, message) {
+    controller.hears(['evento'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "GET");
     });
 
