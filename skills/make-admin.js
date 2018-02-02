@@ -3,10 +3,10 @@
  */
 const TAG = "meha, make_admin.js: ";
 module.exports = function(controller) {
-    controller.hears('make admin', 'direct_message', function(bot, message) {
+    controller.hears('tornar admin', 'direct_message', function(bot, message) {
         handel(controller, bot, message, "SET");
     });
-    controller.hears('remove admin', 'direct_message', function(bot, message) {
+    controller.hears('remover admin', 'direct_message', function(bot, message) {
         handel(controller, bot, message, "DELETE");
     });
     controller.hears(['admin', 'status'], 'direct_message', function(bot, message) {
@@ -18,7 +18,7 @@ function handel(controller, bot, message, method) {
     var person = message.original_message.personId;
     controller.storage.users.get(person, function(err, user) {
         if (!user) {
-            bot.reply(message, "Sorry. We don't share a classroom!");
+            bot.reply(message, "Desculpe. Nós não estamos em uma sala de aula compartilhada!");
             return;
         }
 
@@ -35,16 +35,16 @@ function handel(controller, bot, message, method) {
         bot.startConversation(message, function(err,convo) {
 
             var choice = "";
-            choice += "For which class?  \nReply with the number i.e. `1`, `2` etc. or `quit` to abort  \n  \n";
+            choice += "Para qual sala?  \nReplicar com o número, ou seja, `1`, `2` etc. ou `sair` para finalizar  \n  \n";
             for(var idy= 0; idy<rooms.length; idy++) {
                 choice += (idy+1) + ". " + rooms[idy].title +"  \n";
             }
 
             convo.addQuestion(choice,[
                 {
-                    pattern: 'quit',
+                    pattern: 'sair',
                     callback: function(response,convo) {
-                        convo.say('Aborted');
+                        convo.say('Finalizar');
                         convo.next();
                     }
                 },
@@ -81,18 +81,18 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
         if(method==="SET" || method==="DELETE") {
 
             var teach = false;
-            var confirm = "Removed admin privileges";
+            var confirm = "Remover privilégios de admin";
             if(method==="SET") {
                 teach = true;
-                confirm = "Set as Admin";
+                confirm = "Dixar como admin";
             }
 
             if (room.teacher) {
-                convo.ask('Enter the email address of the person or `quit` to abort', [
+                convo.ask(' Entrar com o e-mail da pessoa ou  pressione `sair` para finalizar', [
                     {
-                        pattern:  'quit',
+                        pattern:  'sair',
                         callback: function(response, convo) {
-                            convo.say('Aborted');
+                            convo.say('cancelar');
                             convo.next();
                         }
                     },
@@ -146,21 +146,21 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                 ]);
             }
             else { //student
-                convo.say("Sorry. You are not authorized to set this information");
+                convo.say("Desculpe. VocÊ não está autorizado par modificar essa informação");
             }
         }
         else if(method==="GET") {
             if (room.teacher) {
-                convo.say("Admin Status: You have admin privileges");
+                convo.say(" Status de Admin: Você tem privilégios de administrador");
             }
             else { //student
-                convo.say("Admin Status: You **do not** have admin privileges");
+                convo.say("Status de Admin: Você **não** tem privilégios de administrador");
             }
         }
         convo.next();
     }
     else {
-        convo.say("Pick a number from the list!");
+        convo.say("Coloque um número da lista!");
         // just repeat the question
         convo.repeat();
         convo.next();

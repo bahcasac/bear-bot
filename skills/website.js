@@ -6,15 +6,15 @@ const TAG = "meha, website.js: ";
 
 
 module.exports = function(controller) {
-    controller.hears(['set website'], 'direct_message', function(bot, message) {
+    controller.hears(['enviar site'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "SET");
     });
 
-    controller.hears(['delete website'], 'direct_message', function(bot, message) {
+    controller.hears(['deletar site'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "DELETE");
     });
 
-    controller.hears(['website'], 'direct_message', function(bot, message) {
+    controller.hears(['site'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "GET");
     });
 
@@ -24,7 +24,7 @@ function handel(controller, bot, message, method) {
     var person = message.original_message.personId;
     controller.storage.users.get(person, function(err, user) {
         if (!user) {
-            bot.reply(message, "Sorry. We don't share a classroom!");
+            bot.reply(message, "Desculpe. Nós não estamos em um ambiente de sala de aula compartilhado!");
             return;
         }
 
@@ -41,16 +41,16 @@ function handel(controller, bot, message, method) {
         bot.startConversation(message, function(err,convo) {
 
             var choice = "";
-            choice += "For which class?  \nReply with the number i.e. `1`, `2` etc. or `quit` to abort  \n  \n";
+            choice += "Para qual sala?  \nReplicar com o número, ou seja, `1`, `2` etc. ou `sair` para finalizar  \n  \n";
             for(var idy= 0; idy<rooms.length; idy++) {
                 choice += (idy+1) + ". " + rooms[idy].title +"  \n";
             }
 
             convo.addQuestion(choice,[
                 {
-                    pattern: 'quit',
+                    pattern: 'sair',
                     callback: function(response,convo) {
-                        convo.say('Aborted');
+                        convo.say('Finalizar');
                         convo.next();
                     }
                 },
@@ -88,11 +88,11 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
             if (room.teacher) {
 
                 if(method==="SET") {
-                    convo.ask('Enter the course website link or `quit` to abort', [
+                    convo.ask('Digite o link do curso ou `sair` para finalizar', [
                         {
-                            pattern:  'quit',
+                            pattern:  'sair',
                             callback: function(response, convo) {
-                                convo.say('Aborted');
+                                convo.say('Finalizado');
                                 convo.next();
                             }
                         },
@@ -112,10 +112,10 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                                 });
 
                                 // notify everyone
-                                bot.reply({channel: room.id}, 'Course website have been set to '+ response.text+'  \nType `website` in a **personal conversation** to query later');
+                                bot.reply({channel: room.id}, 'Site do curso foi enviado para '+ response.text+'  \nDigite `site` em uma **conversa pessoal (1:1)** para consultar depois');
 
                                 // done
-                                convo.say('Website set');
+                                convo.say('Site enviado');
                                 convo.next();
                             }
                         }
@@ -131,7 +131,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                             });
 
                             //notify everyone
-                            bot.reply({channel: room.id}, 'Course Website have been removed');
+                            bot.reply({channel: room.id}, 'Site do curso foi removido');
                         }
                     });
 
@@ -141,7 +141,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                 }
             }
             else { //student
-                convo.say("Sorry. You are not authorized to set this information");
+                convo.say("Desculpe. Você não está autorizado para enviar essa informação");
             }
         }
         else if(method==="GET") {
@@ -152,7 +152,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                         convo.say(room.details.website);
                     }
                     else {
-                        convo.say("Course Website not set");
+                        convo.say("Site do curso não foi enviado");
                     }
                 }
             });
@@ -160,7 +160,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
         convo.next();
     }
     else {
-        convo.say("Pick a number from the list!");
+        convo.say("Escolha um número da lista!");
         // just repeat the question
         convo.repeat();
         convo.next();

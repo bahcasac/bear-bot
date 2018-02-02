@@ -8,7 +8,7 @@ module.exports = function(controller) {
 
     controller.on('direct_mention', function (bot, message) {
         // reply to _message_ by using the _bot_ object
-        bot.reply(message, 'Sorry. I only talk in a **personal conversation**!');
+        bot.reply(message, 'Desculpe. Eu apenas falo em **conversas pessoais (1:1)**!');
     });
 
 }

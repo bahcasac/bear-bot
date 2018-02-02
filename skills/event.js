@@ -286,7 +286,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                             ],{},'default');
                         }
                         else {
-                            convo.say("No event found");
+                            convo.say("Nenhum evento encontrado");
                         }
                     });
                 }
@@ -340,7 +340,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                         convo.say(choice);
                     }
                     else {
-                        convo.say("No event found");
+                        convo.say("Nenhum evento encontrado");
                     }
                 }
             });
@@ -348,7 +348,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
         convo.next();
     }
     else {
-        convo.say("Pick a number from the list!");
+        convo.say("Escolha em número da lista!");
         // just repeat the question
         convo.repeat();
         convo.next();

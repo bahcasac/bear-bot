@@ -6,15 +6,15 @@ const TAG = "meha, syllabus.js: ";
 
 
 module.exports = function(controller) {
-    controller.hears(['set syllabus'], 'direct_message', function(bot, message) {
+    controller.hears(['enviar resumo'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "SET");
     });
 
-    controller.hears(['delete syllabus'], 'direct_message', function(bot, message) {
+    controller.hears(['deletar resumo'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "DELETE");
     });
 
-    controller.hears(['syllabus'], 'direct_message', function(bot, message) {
+    controller.hears(['resumo'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "GET");
     });
 
@@ -24,7 +24,7 @@ function handel(controller, bot, message, method) {
     var person = message.original_message.personId;
     controller.storage.users.get(person, function(err, user) {
         if (!user) {
-            bot.reply(message, "Sorry. We don't share a classroom!");
+            bot.reply(message, "Desculpe. Nós não estamos em um ambiente de sala de aula compartilhado!");
             return;
         }
 
@@ -41,7 +41,7 @@ function handel(controller, bot, message, method) {
         bot.startConversation(message, function(err,convo) {
 
             var choice = "";
-            choice += "For which class?  \nReply with the number i.e. `1`, `2` etc. or `quit` to abort  \n  \n";
+            choice += "Para qual sala?  \nReplicar com o número, ou seja, `1`, `2` etc. ou `sair` para finalizar  \n  \n";
             for(var idy= 0; idy<rooms.length; idy++) {
                 choice += (idy+1) + ". " + rooms[idy].title +"  \n";
             }
@@ -88,11 +88,11 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
             if (room.teacher) {
 
                 if(method==="SET") {
-                    convo.ask('Enter the link of the syllabus or `quit` to abort', [
+                    convo.ask('Enviar o link do resumo ou `sair` para finalizar', [
                         {
-                            pattern:  'quit',
+                            pattern:  'sair',
                             callback: function(response, convo) {
-                                convo.say('Aborted');
+                                convo.say('Finalizado');
                                 convo.next();
                             }
                         },
@@ -112,10 +112,10 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                                 });
 
                                 // notify everyone
-                                bot.reply({channel: room.id}, 'Syllabus link have been set to '+ response.text+'  \nType `syllabus` in a **personal conversation** to query later');
+                                bot.reply({channel: room.id}, 'link de resumo foi enviado para '+ response.text+'  \nDigite `resumo` em uma **conversa pessoal (1:1)** para consultar depois');
 
                                 // done
-                                convo.say('Syllabus link set!');
+                                convo.say('Link de resumo foi enviado!');
                                 convo.next();
                             }
                         }
@@ -131,17 +131,17 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                             });
 
                             //notify everyone
-                            bot.reply({channel: room.id}, 'Syllabus link has been removed');
+                            bot.reply({channel: room.id}, 'Link do resumo foi removido');
                         }
                     });
 
                     // done
-                    convo.say('Syllabus deleted');
+                    convo.say('Resumo deletado');
                     convo.next();
                 }
             }
             else { //student
-                convo.say("Sorry. You are not authorized to set this information");
+                convo.say("Desculpe. Você não está autorizado para enviar essa informação.");
             }
         }
         else if(method==="GET") {
@@ -149,10 +149,10 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
             controller.storage.channels.get(room.id, function (err, room) {
                 if (room) {
                     if(room.details.syllabus) {
-                        convo.say("Link of the syllabus: "+ room.details.syllabus);
+                        convo.say("Link do resumo Link of the syllabus: "+ room.details.syllabus);
                     }
                     else {
-                        convo.say("Syllabus link is not set");
+                        convo.say("Link do resumo não foi enviado");
                     }
                 }
             });
@@ -160,7 +160,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
         convo.next();
     }
     else {
-        convo.say("Pick a number from the list!");
+        convo.say("Escolha um número da listas!");
         // just repeat the question
         convo.repeat();
         convo.next();

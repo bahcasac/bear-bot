@@ -6,15 +6,15 @@ const TAG = "meha, office_hour.js: ";
 
 
 module.exports = function(controller) {
-    controller.hears(['set office hours'], 'direct_message', function(bot, message) {
+    controller.hears(['enviar expediente'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "SET");
     });
 
-    controller.hears(['delete office hours'], 'direct_message', function(bot, message) {
+    controller.hears(['deletar expediente'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "DELETE");
     });
 
-    controller.hears(['office hours'], 'direct_message', function(bot, message) {
+    controller.hears(['expediente'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "GET");
     });
 
@@ -24,7 +24,7 @@ function handel(controller, bot, message, method) {
     var person = message.original_message.personId;
     controller.storage.users.get(person, function(err, user) {
         if (!user) {
-            bot.reply(message, "Sorry. We don't share a classroom!");
+            bot.reply(message, "Desculpe. Nós não estamos em uma sala de aula compartilhada!");
             return;
         }
 
@@ -41,16 +41,16 @@ function handel(controller, bot, message, method) {
         bot.startConversation(message, function(err,convo) {
 
             var choice = "";
-            choice += "For which class?  \nReply with the number i.e. `1`, `2` etc. or `quit` to abort  \n  \n";
+            choice += "Para qual sala?  \nReplicar com o número, ou seja, `1`, `2` etc. ou `sair` para finalizar  \n  \n";
             for(var idy= 0; idy<rooms.length; idy++) {
                 choice += (idy+1) + ". " + rooms[idy].title +"  \n";
             }
 
             convo.addQuestion(choice,[
                 {
-                    pattern: 'quit',
+                    pattern: 'sair',
                     callback: function(response,convo) {
-                        convo.say('Aborted');
+                        convo.say('Finalizar');
                         convo.next();
                     }
                 },
@@ -88,11 +88,11 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
             if (room.teacher) {
 
                 if(method==="SET") {
-                    convo.ask('Enter the Office Hours i.e. `MTF 9am-11am` or `quit` to abort', [
+                    convo.ask('Entre com o expediente, por exemplo: `MTF 9am-11am` ou `sair` para finalizar', [
                         {
-                            pattern:  'quit',
+                            pattern:  'sair',
                             callback: function(response, convo) {
-                                convo.say('Aborted');
+                                convo.say('Finalizado');
                                 convo.next();
                             }
                         },
@@ -112,10 +112,10 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                                 });
 
                                 // notify everyone
-                                bot.reply({channel: room.id}, 'New office hours have been set to '+ response.text+'  \nType `office hours` in a **personal conversation** to query later');
+                                bot.reply({channel: room.id}, 'Novo expediente foi colocado para '+ response.text+'  \nDigite `expediente` em uma **conversa pessoal (1:1)** para consultar depois');
 
                                 // done
-                                convo.say('Office hours set');
+                                convo.say('Expediente alterado');
                                 convo.next();
                             }
                         }
@@ -131,17 +131,17 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                             });
 
                             //notify everyone
-                            bot.reply({channel: room.id}, 'Office hours have been removed');
+                            bot.reply({channel: room.id}, 'O Expediente foi removido');
                         }
                     });
 
                     // done
-                    convo.say('Office hours deleted');
+                    convo.say('Expediente removido');
                     convo.next();
                 }
             }
             else { //student
-                convo.say("Sorry. You are not authorized to set this information");
+                convo.say(" Desculpe. Você não está autorizado a enviar essa informação");
             }
         }
         else if(method==="GET") {
@@ -152,7 +152,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                         convo.say(room.details.office_hours);
                     }
                     else {
-                        convo.say("Office hours are not set");
+                        convo.say("Expediente não foi alterado");
                     }
                 }
             });
@@ -160,7 +160,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
         convo.next();
     }
     else {
-        convo.say("Pick a number from the list!");
+        convo.say("Escolha um número da lista!");
         // just repeat the question
         convo.repeat();
         convo.next();

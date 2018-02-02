@@ -6,21 +6,21 @@ const TAG = "meha, due.js: ";
 var Util = require("../components/util.js");
 
 module.exports = function(controller) {
-    controller.hears(['add due', 'set due'], 'direct_message', function(bot, message) {
+    controller.hears(['adicionar tarefa', 'enviar tarefa'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "SET");
     });
 
 
-    controller.hears(['update due', 'edit due'], 'direct_message', function(bot, message) {
+    controller.hears(['atualizar tarefa', 'editar tarefa'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "EDIT");
     });
 
-    controller.hears(['delete due'], 'direct_message', function(bot, message) {
+    controller.hears(['deletar tarefa'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "DELETE");
     });
 
 
-    controller.hears(['due'], 'direct_message', function(bot, message) {
+    controller.hears(['tarefa'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "GET");
     });
 
@@ -55,9 +55,9 @@ function handel(controller, bot, message, method) {
 
             convo.addQuestion(choice,[
                 {
-                    pattern: 'quit',
+                    pattern: 'sair',
                     callback: function(response,convo) {
-                        convo.say('Aborted');
+                        convo.say('Finalizado');
                         convo.next();
                     }
                 },
@@ -87,21 +87,21 @@ function handel(controller, bot, message, method) {
 
 function form(controller, bot, convo, room, idx, due) {
 
-    var nameQ = 'Enter a name i.e. `Homework #1` or `quit` to abort';
-    var descQ = 'Enter a description i.e. `Read chapter 1 & 2 and answer this question in this link: https:foo.bar` or `quit` to abort';
+    var nameQ = 'Digitar um nome, por exemplo: `Lista de Estudos  #1` ou `sair` para finalizar';
+    var descQ = 'Digitar uma descrição, por exemplo: `Leia o capítulo 1 & 2 e responta a questão deste link: https:foo.bar` ou `sair` para finalizar';
     var timeQ = 'Enter due date in YYYY-MM-DD HH-MM format i.e. `2017-12-12 23:59` or `quit` to abort';
     if(due) {
-        nameQ += "  \n  \n*Current: "+due.name+"*";
-        descQ += "  \n  \n*Current: "+due.description+"*";
-        timeQ += "  \n  \n*Current: "+due.time+"*";
+        nameQ += "  \n  \n*Atual: "+due.name+"*";
+        descQ += "  \n  \n*Atual: "+due.description+"*";
+        timeQ += "  \n  \n*Atual: "+due.time+"*";
     }
 
     const TAG = "meha, due.js: form: ";
     convo.ask(nameQ, [
         {
-            pattern:  'quit',
+            pattern:  'sair',
             callback: function(response, convo) {
-                convo.say('Aborted');
+                convo.say('Finalizado');
                 convo.next();
             }
         },
@@ -112,9 +112,9 @@ function form(controller, bot, convo, room, idx, due) {
                 var name = response.text;
                 convo.ask(descQ, [
                     {
-                        pattern:  'quit',
+                        pattern:  'sair',
                         callback: function(response, convo) {
-                            convo.say('Aborted');
+                            convo.say('Finalizado');
                             convo.next();
                         }
                     },
@@ -126,9 +126,9 @@ function form(controller, bot, convo, room, idx, due) {
 
                             convo.ask(timeQ, [
                                 {
-                                    pattern:  'quit',
+                                    pattern:  'sair',
                                     callback: function(response, convo) {
-                                        convo.say('Aborted');
+                                        convo.say('Finalizado');
                                         convo.next();
                                     }
                                 },
@@ -139,11 +139,11 @@ function form(controller, bot, convo, room, idx, due) {
                                         /// this is time
                                         var time = response.text;
 
-                                        var notif ='New deu has been added:  \n**'+name+'**  \n'+description+'  \nDate: '+time;
+                                        var notif ='Nova tarefa adicionada:  \n**'+name+'**  \n'+description+'  \nDate: '+time;
 
                                         // save it
                                         if(due) {
-                                            notif = 'Deu '+ due.name+' has been updated:  \n**'+name+'**  \n'+description+'  \nDate: '+time;
+                                            notif = 'Tarefa '+ due.name+' foi atualizada:  \n**'+name+'**  \n'+description+'  \nData: '+time;
 
                                             // update
                                             controller.storage.channels.get(room.id, function (err, room) {
@@ -186,7 +186,7 @@ function form(controller, bot, convo, room, idx, due) {
                                             }
                                         });
 
-                                        convo.say('Saved due');
+                                        convo.say('Tarefa salva');
                                         convo.next();
                                     }
                                 },
@@ -230,16 +230,16 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                         if(room.details.due && room.details.due.length>0) {
                             var dues = room.details.due;
 
-                            var choice = "Which due? Reply with the number i.e. `1`, `2` etc. or `quit` to abort  \n";
+                            var choice = "Qual tarefa? Responda com um número. Por exemplo `1`, `2` etc. ou `sair` para finalizar  \n";
                             for(var idp= 0; idp<dues.length; idp++) {
                                 choice += (idp+1) + ". " + dues[idp].name +"  \n";
                             }
 
                             convo.addQuestion(choice,[
                                 {
-                                    pattern: 'quit',
-                                    callback: function(response,convo) {
-                                        convo.say('Aborted');
+                                    pattern:  'sair',
+                                    callback: function(response, convo) {
+                                        convo.say('Finalizado');
                                         convo.next();
                                     }
                                 },
@@ -269,7 +269,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                                             convo.next();
                                         }
                                         else {
-                                            convo.say("Pick a number from the list!");
+                                            convo.say("Escolha um número da lista!");
                                             // just repeat the question
                                             convo.repeat();
                                             convo.next();
@@ -293,7 +293,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                 }
             }
             else { //student
-                convo.say("Sorry. You are not authorized to set this information");
+                convo.say("Desculpe. Você não está autorizado a enviar essa informação");
             }
         }
         else if(method==="GET") {
@@ -324,7 +324,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
 
 
                         // TODO: add to cal
-                        var choice = "**Upcoming due:**  \n";
+                        var choice = "**Atualizar tarefa:**  \n";
                         var cnt = 0;
                         for(var idk= 0; idk<dues.length; idk++) {
 
@@ -341,7 +341,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                         convo.say(choice);
                     }
                     else {
-                        convo.say("No due found");
+                        convo.say("Não encontrado");
                     }
                 }
             });
@@ -349,7 +349,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
         convo.next();
     }
     else {
-        convo.say("Pick a number from the list!");
+        convo.say("Escolha um número da lista!");
         // just repeat the question
         convo.repeat();
         convo.next();

@@ -15,6 +15,7 @@ module.exports = function(controller) {
         handel(controller, bot, message, "EDIT");
     });
 
+    
     controller.hears(['deletar notícias'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "DELETE");
     });
@@ -32,7 +33,7 @@ function handel(controller, bot, message, method) {
     var person = message.original_message.personId;
     controller.storage.users.get(person, function(err, user) {
         if (!user) {
-            bot.reply(message, "Sorry. We don't share a classroom!");
+            bot.reply(message, "Desculpe. Nós não estamos em uma sala de aula compartilhada!");
             return;
         }
 
@@ -48,16 +49,16 @@ function handel(controller, bot, message, method) {
         bot.startConversation(message, function(err,convo) {
 
             var choice = "";
-            choice += "For which class?  \nReply with the number i.e. `1`, `2` etc. or `quit` to abort  \n  \n";
+            choice += "Para qual sala?  \nReplicar com o número, ou seja, `1`, `2` etc. ou `sair` para finalizar  \n  \n";
             for(var idy= 0; idy<rooms.length; idy++) {
                 choice += (idy+1) + ". " + rooms[idy].title +"  \n";
             }
 
             convo.addQuestion(choice,[
                 {
-                    pattern: 'quit',
+                    pattern: 'sair',
                     callback: function(response,convo) {
-                        convo.say('Aborted');
+                        convo.say('Finalizar');
                         convo.next();
                     }
                 },
@@ -87,18 +88,18 @@ function handel(controller, bot, message, method) {
 
 function form(controller, bot, convo, room, idx, due) {
 
-    var nameQ = 'Enter a title i.e. `Class schedule is changing for 20th August` or `quit` to abort';
-    var descQ = 'Enter a description i.e. `New schedule: MTF 10am-11am, details here: foo.bar` or `quit` to abort';
+    var nameQ = 'Entre com um título, por exemplo:  `Aula alterada para 20 de Agosto` ou `sair` para finalizar';
+    var descQ = 'Entre com uma descrição, por exemplo `Novo agendamento: MTF 10am-11am, detalhes aqui: foo.bar` ou `sair` para finalizar';
     if(due) {
-        nameQ += "  \n  \n*Current: "+due.name+"*";
-        descQ += "  \n  \n*Current: "+due.description+"*";
+        nameQ += "  \n  \n*Atual: "+due.name+"*";
+        descQ += "  \n  \n*Atual: "+due.description+"*";
     }
 
     convo.ask(nameQ, [
         {
-            pattern:  'quit',
+            pattern:  'sair',
             callback: function(response, convo) {
-                convo.say('Aborted');
+                convo.say('Finalizar');
                 convo.next();
             }
         },
@@ -109,9 +110,9 @@ function form(controller, bot, convo, room, idx, due) {
                 var name = response.text;
                 convo.ask(descQ, [
                     {
-                        pattern:  'quit',
+                        pattern:  'sair',
                         callback: function(response, convo) {
-                            convo.say('Aborted');
+                            convo.say('Finalizar');
                             convo.next();
                         }
                     },
@@ -121,11 +122,11 @@ function form(controller, bot, convo, room, idx, due) {
                             // this is the description string
                             var description = response.text;
 
-                            var notif ='Notice:  \n**'+name+'**  \n'+description+'  \n';
+                            var notif ='Informar:  \n**'+name+'**  \n'+description+'  \n';
 
                             // save it
                             if(due) {
-                                notif = 'Notice '+ due.name+' has been updated:  \n**'+name+'**  \n'+description+'  \n';
+                                notif = 'Informar '+ due.name+' foi atuaizado:  \n**'+name+'**  \n'+description+'  \n';
 
                                 // update
                                 controller.storage.channels.get(room.id, function (err, room) {
@@ -162,7 +163,7 @@ function form(controller, bot, convo, room, idx, due) {
                                 }
                             });
 
-                            convo.say('Saved news');
+                            convo.say('Notícias salvas');
 
                             convo.next();
                         }
@@ -194,16 +195,16 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                         if(room.details.news && room.details.news.length>0) {
                             var dues = room.details.news;
 
-                            var choice = "Which news? Reply with the number i.e. `1`, `2` etc. or `quit` to abort  \n";
+                            var choice = "Quais notícias? \nReplicar com o número, ou seja, `1`, `2` etc. ou `sair` para finalizar  \n ";
                             for(var idp= 0; idp<dues.length; idp++) {
                                 choice += (idp+1) + ". " + dues[idp].name +"  \n";
                             }
 
                             convo.addQuestion(choice,[
                                 {
-                                    pattern: 'quit',
+                                    pattern: 'sair',
                                     callback: function(response,convo) {
-                                        convo.say('Aborted');
+                                        convo.say('Finalizar');
                                         convo.next();
                                     }
                                 },
@@ -223,7 +224,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                                             }
                                             else if(method==="DELETE") {
                                                 Util.deleteItemFromArray(dues, optdue-1);
-                                                convo.say("Deleted");
+                                                convo.say("Deletado");
                                                 room.details.news = dues;
                                                 controller.storage.channels.save(room, function (err, id) {
                                                     if (err) console.error(TAG+ "controller.storage.channels.save not working");
@@ -233,7 +234,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                                             convo.next();
                                         }
                                         else {
-                                            convo.say("Pick a number from the list!");
+                                            convo.say("Escolha um número da lista!");
                                             // just repeat the question
                                             convo.repeat();
                                             convo.next();
@@ -251,13 +252,13 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                             ],{},'default');
                         }
                         else {
-                            convo.say("No news found");
+                            convo.say("Nenhuma notícia encontrada!");
                         }
                     });
                 }
             }
             else { //student
-                convo.say("Sorry. You are not authorized to set this information");
+                convo.say("Desculpe. Nós não estamos autorizados para colocar essa informação");
             }
         }
         else if(method==="GET") {
@@ -269,7 +270,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                         var dues = room.details.news;
 
                         // TODO: add to cal
-                        var choice = "**News/Notices:**  \n";
+                        var choice = "**Notícias/Observações:**  \n";
                         var cnt = 0;
                         for(var idk= 0; idk<dues.length; idk++) {
                             cnt++;
@@ -279,7 +280,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                         convo.say(choice);
                     }
                     else {
-                        convo.say("No news found");
+                        convo.say("Nenhuma notícia encontrada");
                     }
                 }
             });
@@ -287,7 +288,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
         convo.next();
     }
     else {
-        convo.say("Pick a number from the list!");
+        convo.say("Escolha um número da lista!");
         // just repeat the question
         convo.repeat();
         convo.next();

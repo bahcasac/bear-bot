@@ -6,15 +6,15 @@ const TAG = "meha, office_hour.js: ";
 
 
 module.exports = function(controller) {
-    controller.hears(['set resources'], 'direct_message', function(bot, message) {
+    controller.hears(['enviar recursos'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "SET");
     });
 
-    controller.hears(['delete resources'], 'direct_message', function(bot, message) {
+    controller.hears(['deletar recursos'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "DELETE");
     });
 
-    controller.hears(['resources'], 'direct_message', function(bot, message) {
+    controller.hears(['recursos'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "GET");
     });
 
@@ -24,7 +24,7 @@ function handel(controller, bot, message, method) {
     var person = message.original_message.personId;
     controller.storage.users.get(person, function(err, user) {
         if (!user) {
-            bot.reply(message, "Sorry. We don't share a classroom!");
+            bot.reply(message, "Desculpe. Nós não estamos em um ambiente de sala de aula compartilhado!");
             return;
         }
 
@@ -41,16 +41,16 @@ function handel(controller, bot, message, method) {
         bot.startConversation(message, function(err,convo) {
 
             var choice = "";
-            choice += "For which class?  \nReply with the number i.e. `1`, `2` etc. or `quit` to abort  \n  \n";
+            choice += "Para qual sala?  \nReplicar com o número, ou seja, `1`, `2` etc. ou `sair` para finalizar  \n  \n";
             for(var idy= 0; idy<rooms.length; idy++) {
                 choice += (idy+1) + ". " + rooms[idy].title +"  \n";
             }
 
             convo.addQuestion(choice,[
                 {
-                    pattern: 'quit',
+                    pattern: 'sair',
                     callback: function(response,convo) {
-                        convo.say('Aborted');
+                        convo.say('Finalizado');
                         convo.next();
                     }
                 },
@@ -88,11 +88,11 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
             if (room.teacher) {
 
                 if(method==="SET") {
-                    convo.ask('Enter the link of Course Resources page or `quit` to abort', [
+                    convo.ask('Enviar o link da página de Recurso ou `sair` para finalizar', [
                         {
-                            pattern:  'quit',
+                            pattern: 'sair',
                             callback: function(response, convo) {
-                                convo.say('Aborted');
+                                convo.say('Finalizado');
                                 convo.next();
                             }
                         },
@@ -111,10 +111,10 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                                 });
 
                                 // notify everyone
-                                bot.reply({channel: room.id}, 'New link of Course Resources has been set to '+ response.text+'  \nType `office hours` in a **personal conversation** to query later');
+                                bot.reply({channel: room.id}, 'Novo link de Recurso foi enviado para '+ response.text+'  \nDigite `recursos` em uma **conversa pessoal (1:1)** para consultar depois');
 
                                 // done
-                                convo.say('Resource link set');
+                                convo.say('Link de recurso enviado');
                                 convo.next();
                             }
                         }
@@ -130,17 +130,17 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                             });
 
                             //notify everyone
-                            bot.reply({channel: room.id}, 'Link of Course Resources has been removed');
+                            bot.reply({channel: room.id}, 'Link do Recurso foi removido');
                         }
                     });
 
                     // done
-                    convo.say('Resource link deleted');
+                    convo.say('Link de recurso removido');
                     convo.next();
                 }
             }
             else { //student
-                convo.say("Sorry. You are not authorized to set this information");
+                convo.say("Desculpe. Você não está autorizado a enviar essa informação");
             }
         }
         else if(method==="GET") {
@@ -151,7 +151,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                         convo.say(room.details.resources);
                     }
                     else {
-                        convo.say("Link of the Course Resources is not set");
+                        convo.say("Link do Recurso não foi enviado");
                     }
                 }
             });
@@ -159,7 +159,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
         convo.next();
     }
     else {
-        convo.say("Pick a number from the list!");
+        convo.say("Escolha um número da lista!");
         // just repeat the question
         convo.repeat();
         convo.next();
