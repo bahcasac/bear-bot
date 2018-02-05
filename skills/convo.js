@@ -23,7 +23,7 @@ module.exports = function(controller) {
                 // assuming data is not in my db ->
                 // save the room data marked as inactive, save persons in the room
 
-                bot.reply(message, 'Olá 👋  \nI sou o Bear, um bot de sala de aula!  \n'
+                bot.reply(message, 'Olá 👋  \nEu sou o Bear, um bot de sala de aula!  \n'
                     + 'Digite `Oi`  em uma **mensagem direta** para falar comigo');
 
                 var creatorId = details.creatorId;
@@ -127,7 +127,7 @@ module.exports = function(controller) {
             if (details.type === "group") {
 
                 bot.reply(message, 'Olá, <@personId:'+newcomerId+'|'+name+'> 👋  \n'
-                    + 'Digite `hi` em uma **mensagem direta** para falar comigo');
+                    + 'Digite `oi` em uma **mensagem direta** para falar comigo');
 
                 // save user
                 controller.storage.users.get(newcomerId, function (err, user) {

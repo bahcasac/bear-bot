@@ -3,10 +3,10 @@
  */
 
 module.exports = function(controller) {
-    controller.hears(['thanks', 'thank you'], 'direct_message', function(bot, message) {
-        bot.reply(message, "Happy to help 😃");
+    controller.hears(['obrigado', 'obrigada'], 'direct_message', function(bot, message) {
+        bot.reply(message, "Feliz em ajudar 😃");
     });
-    controller.hears(['ok', 'okay', 'got it'], 'direct_message', function(bot, message) {
-        bot.reply(message, "Alright 😃");
+    controller.hears(['ok', 'certo', 'consegui','ta bom', 'beleza'], 'direct_message', function(bot, message) {
+        bot.reply(message, "Certo 😃");
     });
 };

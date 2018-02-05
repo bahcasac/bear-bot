@@ -84,7 +84,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
             var confirm = "Remover privilégios de admin";
             if(method==="SET") {
                 teach = true;
-                confirm = "Dixar como admin";
+                confirm = "Deixar como admin";
             }
 
             if (room.teacher) {
@@ -146,7 +146,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                 ]);
             }
             else { //student
-                convo.say("Desculpe. VocÊ não está autorizado par modificar essa informação");
+                convo.say("Desculpe. Você não está autorizado par modificar essa informação");
             }
         }
         else if(method==="GET") {

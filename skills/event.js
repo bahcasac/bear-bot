@@ -48,16 +48,16 @@ function handel(controller, bot, message, method) {
         bot.startConversation(message, function(err,convo) {
 
             var choice = "";
-            choice += "For which class?  \nReply with the number i.e. `1`, `2` etc. or `quit` to abort  \n  \n";
+            choice += "Para qual sala?  \nDigitar um número. Por exemplo,  `1`, `2` etc. ou `sair` para finalizar  \n  \n";
             for(var idy= 0; idy<rooms.length; idy++) {
                 choice += (idy+1) + ". " + rooms[idy].title +"  \n";
             }
 
             convo.addQuestion(choice,[
                 {
-                    pattern: 'quit',
+                    pattern: 'sair',
                     callback: function(response,convo) {
-                        convo.say('Aborted');
+                        convo.say('Finalizado');
                         convo.next();
                     }
                 },
@@ -87,20 +87,20 @@ function handel(controller, bot, message, method) {
 
 function form(controller, bot, convo, room, idx, due) {
 
-    var nameQ = 'Enter a name i.e. `Industrial Trip of August` or `quit` to abort';
-    var descQ = 'Enter a description i.e. `Here is the full plan: foo.bar` or `quit` to abort';
-    var timeQ = 'Enter event date in YYYY-MM-DD HH-MM format i.e. `2017-12-12 23:59` or `quit` to abort';
+    var nameQ = 'Digite um nome, por exemplo: `Viagem da Fábrica em Agosto` ou `sair` para finalizar';
+    var descQ = 'Digite uma descrição, por exemplo: `Aqui está um plano completo: foo.bar` ou `sair` para finalizar';
+    var timeQ = 'Digite a data de um evento no formato AAAA-MM-DD HH-MM. Por Exemplo, `2018-01-12 23:59` ou `sair` para finalizar';
     if(due) {
-        nameQ += "  \n  \n*Current: "+due.name+"*";
-        descQ += "  \n  \n*Current: "+due.description+"*";
-        timeQ += "  \n  \n*Current: "+due.time+"*";
+        nameQ += "  \n  \n*Atual: "+due.name+"*";
+        descQ += "  \n  \n*Atual: "+due.description+"*";
+        timeQ += "  \n  \n*Atual: "+due.time+"*";
     }
 
     convo.ask(nameQ, [
         {
-            pattern:  'quit',
+            pattern:  'sair',
             callback: function(response, convo) {
-                convo.say('Aborted');
+                convo.say('Finalizado');
                 convo.next();
             }
         },
@@ -111,9 +111,9 @@ function form(controller, bot, convo, room, idx, due) {
                 var name = response.text;
                 convo.ask(descQ, [
                     {
-                        pattern:  'quit',
+                        pattern:  'sair',
                         callback: function(response, convo) {
-                            convo.say('Aborted');
+                            convo.say('Finalizado');
                             convo.next();
                         }
                     },
@@ -125,9 +125,9 @@ function form(controller, bot, convo, room, idx, due) {
 
                             convo.ask(timeQ, [
                                 {
-                                    pattern:  'quit',
+                                    pattern:  'sair',
                                     callback: function(response, convo) {
-                                        convo.say('Aborted');
+                                        convo.say('Finalizado');
                                         convo.next();
                                     }
                                 },
@@ -138,11 +138,11 @@ function form(controller, bot, convo, room, idx, due) {
                                         /// this is time
                                         var time = response.text;
 
-                                        var notif ='New event has been added:  \n**'+name+'**  \n'+description+'  \nDate: '+time;
+                                        var notif ='Novo evento foi adicionado:  \n**'+name+'**  \n'+description+'  \nData: '+time;
 
                                         // save it
                                         if(due) {
-                                            notif = 'Event '+ due.name+' has been updated:  \n**'+name+'**  \n'+description+'  \nDate: '+time;
+                                            notif = 'Evento '+ due.name+' foi alterado:  \n**'+name+'**  \n'+description+'  \nData: '+time;
 
                                             // update
                                             controller.storage.channels.get(room.id, function (err, room) {
@@ -185,7 +185,7 @@ function form(controller, bot, convo, room, idx, due) {
                                             }
                                         });
 
-                                        convo.say('Saved event');
+                                        convo.say('Evento salvo');
                                         convo.next();
                                     }
                                 },
@@ -229,16 +229,16 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                         if(room.details.event && room.details.event.length>0) {
                             var dues = room.details.event;
 
-                            var choice = "Which event? Reply with the number i.e. `1`, `2` etc. or `quit` to abort  \n";
+                            var choice = "Qual evento? Digite um número. Por exemplo, `1`, `2` etc. ou `sair` para finalizar  \n";
                             for(var idp= 0; idp<dues.length; idp++) {
                                 choice += (idp+1) + ". " + dues[idp].name +"  \n";
                             }
 
                             convo.addQuestion(choice,[
                                 {
-                                    pattern: 'quit',
-                                    callback: function(response,convo) {
-                                        convo.say('Aborted');
+                                    pattern:  'sair',
+                                    callback: function(response, convo) {
+                                        convo.say('Finalizado');
                                         convo.next();
                                     }
                                 },
@@ -258,7 +258,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                                             }
                                             else if(method==="DELETE") {
                                                 Util.deleteItemFromArray(dues, optdue-1);
-                                                convo.say("Deleted");
+                                                convo.say("Apagado");
                                                 room.details.event = dues;
                                                 controller.storage.channels.save(room, function (err, id) {
                                                     if (err) console.error(TAG+ "controller.storage.channels.save not working");
@@ -268,7 +268,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                                             convo.next();
                                         }
                                         else {
-                                            convo.say("Pick a number from the list!");
+                                            convo.say("Entre com um número da lista!");
                                             // just repeat the question
                                             convo.repeat();
                                             convo.next();
@@ -292,7 +292,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                 }
             }
             else { //student
-                convo.say("Sorry. You are not authorized to set this information");
+                convo.say("Desculpe. Você não está autorizado para enviar essa informação");
             }
         }
         else if(method==="GET") {
@@ -323,7 +323,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
 
 
                         // TODO: add to cal
-                        var choice = "**Upcoming events:**  \n";
+                        var choice = "**Próximos eventos:**  \n";
                         var cnt = 0;
                         for(var idk= 0; idk<dues.length; idk++) {
 
@@ -333,7 +333,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
 
                             if(given.getTime() >= nd.getTime()) {
                                 cnt++;
-                                choice += "**"+ cnt + ". " + dues[idk].name +"**  \n"+dues[idk].description+"  \n"+"Date: "+dues[idk].time+"  \n";
+                                choice += "**"+ cnt + ". " + dues[idk].name +"**  \n"+dues[idk].description+"  \n"+"Data: "+dues[idk].time+"  \n";
                             }
                         }
 

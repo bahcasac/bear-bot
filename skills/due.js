@@ -48,7 +48,7 @@ function handel(controller, bot, message, method) {
         bot.startConversation(message, function(err,convo) {
 
             var choice = "";
-            choice += "De qual classe?  \nReply with the number i.e. `1`, `2` etc. or `quit` to abort  \n  \n";
+            choice += "De qual classe?  \nDigitar com um número. Por exemplo, '1', '2' etc ou `sair` para finalizar  \n  \n";
             for(var idy= 0; idy<rooms.length; idy++) {
                 choice += (idy+1) + ". " + rooms[idy].title +"  \n";
             }
@@ -259,7 +259,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                                             }
                                             else if(method==="DELETE") {
                                                 Util.deleteItemFromArray(dues, optdue-1);
-                                                convo.say("Deleted");
+                                                convo.say("Apagado");
                                                 room.details.due = dues;
                                                 controller.storage.channels.save(room, function (err, id) {
                                                     if (err) console.error(TAG+ "controller.storage.channels.save not working");
@@ -287,7 +287,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                             ],{},'default');
                         }
                         else {
-                            convo.say("No due found");
+                            convo.say("Nenhuma tarefa encontrada");
                         }
                     });
                 }

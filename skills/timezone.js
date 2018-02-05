@@ -5,11 +5,11 @@ const TAG = "meha, timezone.js: ";
 
 module.exports = function(controller) {
 
-    controller.hears(['set timezone'], 'direct_message', function(bot, message) {
+    controller.hears(['enviar fuso horário'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "SET");
     });
 
-    controller.hears(['timezone'], 'direct_message', function(bot, message) {
+    controller.hears(['fuso horário'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "GET");
     });
 };
@@ -20,7 +20,7 @@ function handel(controller, bot, message, method) {
     var person = message.original_message.personId;
     controller.storage.users.get(person, function(err, user) {
         if (!user) {
-            bot.reply(message, "Sorry. We don't share a classroom!");
+            bot.reply(message, "Desculpe. Nós não estamos em um ambiente de sala de aula compartilhado!");
             return;
         }
 
@@ -36,16 +36,16 @@ function handel(controller, bot, message, method) {
         bot.startConversation(message, function(err,convo) {
 
             var choice = "";
-            choice += "For which class?  \nReply with the number i.e. `1`, `2` etc. or `quit` to abort  \n  \n";
+            choice += "Para qual sala?  \nReplicar com o número, ou seja, `1`, `2` etc. ou `sair` para finalizar  \n  \n";
             for(var idy= 0; idy<rooms.length; idy++) {
                 choice += (idy+1) + ". " + rooms[idy].title +"  \n";
             }
 
             convo.addQuestion(choice,[
                 {
-                    pattern: 'quit',
+                    pattern: 'sair',
                     callback: function(response,convo) {
-                        convo.say('Aborted');
+                        convo.say('Finalizado');
                         convo.next();
                     }
                 },
@@ -80,11 +80,11 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
 
         if(method==="SET") {
             if (room.teacher) {
-                convo.ask('Enter the timezone(UTC offset) in **{+|-}hh:mm** format i.e. `+06:00` or `quit` to abort', [
+                convo.ask('Digite o fuso horário (UTC offset) no formato **{+|-}hh:mm**. Por exemplo `+06:00` ou `sair` para finalizar', [
                     {
-                        pattern:  'quit',
-                        callback: function(response, convo) {
-                            convo.say('Aborted');
+                        pattern: 'sair',
+                        callback: function(response,convo) {
+                            convo.say('Finalizado');
                             convo.next();
                         }
                     },
@@ -104,7 +104,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                                 }
                             });
 
-                            convo.say('Timezone set');
+                            convo.say('Fuso horário enviado!');
                             convo.next();
                         }
                     },
@@ -119,7 +119,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                 ]);
             }
             else { //student
-                convo.say("Sorry. You are not authorized to set this information");
+                convo.say("Desculpe. Você não está autorizado a enviar essa infomrção");
             }
         }
         else if(method==="GET") {
@@ -130,7 +130,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                         convo.say(room.details.timezone);
                     }
                     else {
-                        convo.say("Timezone is not set");
+                        convo.say("Fuso horário não enviado");
                     }
                 }
             });
@@ -138,7 +138,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
         convo.next();
     }
     else {
-        convo.say("Pick a number from the list!");
+        convo.say("Entre com um número da lista!");
         // just repeat the question
         convo.repeat();
         convo.next();

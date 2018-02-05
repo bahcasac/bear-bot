@@ -14,7 +14,7 @@ function handel(controller, bot, message, method) {
     var person = message.original_message.personId;
     controller.storage.users.get(person, function(err, user) {
         if (!user) {
-            bot.reply(message, "Sorry. We don't share a classroom!");
+            bot.reply(message, "Desculpe. Nós não estamos em uma sala de aula compartilhada!");
             return;
         }
 
@@ -31,16 +31,16 @@ function handel(controller, bot, message, method) {
         bot.startConversation(message, function(err,convo) {
 
             var choice = "";
-            choice += "For which class?  \nReply with the number i.e. `1`, `2` etc. or `quit` to abort  \n  \n";
+            choice += "Para qual sala? \nEntrar com um número. Por exemplo,  `1`, `2` etc. ou `sair` para finalizar  \n  \n";
             for(var idy= 0; idy<rooms.length; idy++) {
                 choice += (idy+1) + ". " + rooms[idy].title +"  \n";
             }
 
             convo.addQuestion(choice,[
                 {
-                    pattern: 'quit',
+                    pattern: 'sair',
                     callback: function(response,convo) {
-                        convo.say('Aborted');
+                        convo.say('Finalizado');
                         convo.next();
                     }
                 },
@@ -75,11 +75,11 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
 
         if(method==="SET") {
             if (!room.teacher) {
-                convo.ask('Write your message or `quit` to abort', [
+                convo.ask('Escreva sua mensagem ou `sair` para finalizar', [
                     {
-                        pattern:  'quit',
-                        callback: function(response, convo) {
-                            convo.say('Aborted');
+                        pattern: 'sair',
+                        callback: function(response,convo) {
+                            convo.say('Finalizado');
                             convo.next();
                         }
                     },
@@ -91,9 +91,9 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                             // post
                             if (!wordfilter.blacklisted(response.text)) {
                                 bot.reply({channel: room.id}, '**Anonymous Student:**  \n'+ response.text);
-                                convo.say('Posted anonymously!');
+                                convo.say('Post anônimo!');
                             } else {
-                                convo.say('Post blocked due to offensive language');
+                                convo.say('Post bloqueado por linguagem ofensiva');
                             }
 
                             convo.next();
@@ -102,13 +102,13 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                 ]);
             }
             else { //teacher
-                convo.say("Sorry. Students only");
+                convo.say("Desculpe. Estudantes apenas");
             }
         }
         convo.next();
     }
     else {
-        convo.say("Pick a number from the list!");
+        convo.say(" Entre com um número da lista!");
         // just repeat the question
         convo.repeat();
         convo.next();

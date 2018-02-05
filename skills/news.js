@@ -224,7 +224,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                                             }
                                             else if(method==="DELETE") {
                                                 Util.deleteItemFromArray(dues, optdue-1);
-                                                convo.say("Deletado");
+                                                convo.say("Apagado");
                                                 room.details.news = dues;
                                                 controller.storage.channels.save(room, function (err, id) {
                                                     if (err) console.error(TAG+ "controller.storage.channels.save not working");

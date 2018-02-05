@@ -136,7 +136,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                     });
 
                     // done
-                    convo.say('website deleted');
+                    convo.say('site apagado');
                     convo.next();
                 }
             }

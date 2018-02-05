@@ -59,19 +59,19 @@ module.exports = function(controller) {
 
 
 
-                    + "**Poll**  \n"
-                    + "-`set/delete poll`: Para questões do espaço ou das polls  \n"
-                    + "-`set poll` com `.docx` com arquivo anexado: Cria uma poll do arquivo  \n"
-                    + "-`set poll with tex`: Criar uma poll com equações Latex Create poll with Latex equations  \n"
-                    + "-`poll`: Visualizar a poll ativa To view the active poll  \n"
-                    + "-`result`: Gerar resultado de uma poll ativa  \n"
+                    + "**Pergunta**  \n"
+                    + "-`enviar/apagar pergunta `: Para questões do espaço ou das pergunta  \n"
+                    + "-`enviar pergunta` com `.docx` com arquivo anexado: Cria uma pergunta do arquivo  \n"
+                    + "-`enviar pergunta com tex`: Criar uma pergunta com equações Latex Create pergunta with Latex equations  \n"
+                    + "-`pergunta`: Visualizar a pergunta ativa  \n"
+                    + "-`resultado`: Gerar resultado de uma pergunta ativa  \n"
 
                     + "**Configurações**  \n"
-                    + "-`set timezone`: Enviar um fuso-horário, todas as consultas e lembretes vão disparar de acordo com isso.  \n"
-                    + "-`timezone`: Exibir o fuso-horário atual  \n"
-                    + "-`make admin`: Dar a alguém o privilégio de administrador (usar o e-mail)  \n"
-                    + "-`remove admin`: Remover o privilégio de administrador (usar o e-mail)   \n"
-                    + "-`admin`: Visualizar o próprio status de admin  \n"
+                    + "-`enviar fuso horário set timezone`: Enviar um fuso-horário, todas as consultas e lembretes vão disparar de acordo com isso.  \n"
+                    + "-`fuso horário`: Exibir o fuso-horário atual  \n"
+                    + "-`tornar administrador`: Dar a alguém o privilégio de administrador (usar o e-mail)  \n"
+                    + "-`remover administrador`: Remover o privilégio de administrador (usar o e-mail)   \n"
+                    + "-`administrador`: Visualizar o próprio status de admin  \n"
 
                     );
                 }
@@ -79,41 +79,41 @@ module.exports = function(controller) {
                     bot.reply(message, "Aqui está a lista de ações suportadas **para estudantes**:  \n"
 
                     + "**Horas do escritório**  \n"
-                    + "-`set/delete office hours`: Para enviar ou deletar horas referentes as informações do escritório  \n"
-                    + "-`office hours`: Informações sobre as horas do escritório  \n"
+                    + "-`enviar/deletar expediente`: Para enviar ou deletar horas referentes as informações do escritório  \n"
+                    + "-`expediente`: Informações sobre as horas do escritório  \n"
 
                     + "**Site do Curso**  \n"
-                    + "-`set/delete website`: Enviar ou deletar informações de um curso  \n"
-                    + "-`website`: Conseguir informações sobre o site  \n"
+                    + "-`enviar/deletar site set/delete website`: Enviar ou deletar informações de um curso  \n"
+                    + "-`site`: Conseguir informações sobre o site  \n"
 
-                    + "**Syllabus**  \n"
-                    + "-`set/delete syllabus`: Enviar ou deletar um link no syllabus  \n"
-                    + "-`syllabus`: Conseguir um link no syllabus  \n"
+                    + "**Resumo**  \n"
+                    + "-`enviar/deletar resumo`: Enviar ou deletar um link no syllabus  \n"
+                    + "-`Resumo`: Conseguir um link no syllabus  \n"
 
                     + "**Recursos do Curso**  \n"
-                    + "-`set/delete resources`: Enviar ou deletar um link de recursos do curso  \n"
-                    + "-`resources`: Pegar o link de recursos do curso  \n"
+                    + "-`enviar/deletar recursos`: Enviar ou deletar um link de recursos do curso  \n"
+                    + "-`recursos`: Pegar o link de recursos do curso  \n"
 
-                    + "**Due**  \n"
-                    + "-`add/update/delete due`: Para dues (homework, assignments, reports) com título, descrição e data  \n"
-                    + "-`due`: Para pegar a lista das próximas dues  \n"
+                    + "**Tarefa**  \n"
+                    + "-`adicionar/alterar/deletar tarefa`: Para tarefas com título, descrição e data  \n"
+                    + "-`tarefa`: Para pegar a lista das próximas tarefas \n"
 
-                    + "**Exam**  \n"
-                    + "-`add/update/delete exam`: Para exames (quiz, midterm, finals) avisos com título, descrição e data  \n"
-                    + "-`exam`: Para pegar a lista das próximas provas  \n"
+                    + "**Prova**  \n"
+                    + "-`adicionar/alterar/deletar prova`: Para provas (quiz, midterm, finals) avisos com título, descrição e data  \n"
+                    + "-`prova`: Para pegar a lista das próximas provas  \n"
 
-                    + "**Events**  \n"
-                    + "-`add/update/delete event`: Para eventos com título, descrição e data  \n"
-                    + "-`event`: Para pegar a lista dos próximos eventos  \n"
+                    + "**Evento**  \n"
+                    + "-`adicionar/alterar/deletar evento`: Para eventos com título, descrição e data  \n"
+                    + "-`evento`: Para pegar a lista dos próximos eventos  \n"
 
-                    + "**News**  \n"
-                    + "-`add/update/delete news`: Para importar anúncios e notificações  \n"
-                    + "-`news`: Para pegar a última informação  \n"
+                    + "**Notícias**  \n"
+                    + "-`adcionar/alterar/deletar notícias`: Para importar anúncios e notificações  \n"
+                    + "-`notícias`: Para pegar a última informação  \n"
 
-                        + "**Poll**  \n"
-                        + "-`poll`: Questões ou polls de participantes anônimos da sala de aula  \n"
+                        + "**Pergunta**  \n"
+                        + "-`pergunta: Questões de participantes anônimos da sala de aula  \n"
 
-                        + "**Anonymous Group Post**  \n"
+                        + "**Gupo de post anônimo**  \n"
                         + "-`post`: Post anônimo de uma questão  \n"
 
                     );

@@ -50,7 +50,7 @@ function handel(controller, bot, message, method) {
                 {
                     pattern: 'sair',
                     callback: function(response,convo) {
-                        convo.say('Finalizar');
+                        convo.say('Finalizado');
                         convo.next();
                     }
                 },
@@ -131,7 +131,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                             });
 
                             //notify everyone
-                            bot.reply({channel: room.id}, 'O Expediente foi removido');
+                            bot.reply({channel: room.id}, 'O expediente foi removido');
                         }
                     });
 

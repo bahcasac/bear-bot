@@ -12,11 +12,11 @@ env(__dirname + '/../.env');
 
 
 module.exports = function(controller) {
-    controller.hears(['add poll with tex', 'set poll with tex', 'create poll with tex', 'new poll with tex'], 'direct_message', function(bot, message) {
+    controller.hears(['adicionar perguntas', 'enviar perguntas com tex', 'criar pergntas com tex', 'novas perguntas adicionadas com tex'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "SET_TEX");
     });
 
-    controller.hears(['add poll', 'set poll', 'create poll', 'new poll'], 'direct_message', function(bot, message) {
+    controller.hears([' adiconar pergunta', 'enviar pergunta', 'criar pergunta', 'nova pergunta'], 'direct_message', function(bot, message) {
         if (message.original_message.files) {
             // could be an latex or normal file
             handel(controller, bot, message, "FILE");
@@ -26,15 +26,15 @@ module.exports = function(controller) {
         }
     });
 
-    controller.hears(['delete poll'], 'direct_message', function(bot, message) {
+    controller.hears(['deletar pergunta'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "DELETE");
     });
 
-    controller.hears(['poll'], 'direct_message', function(bot, message) {
+    controller.hears(['pergunta'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "GET"); // student only
     });
 
-    controller.hears(['result'], 'direct_message', function(bot, message) {
+    controller.hears(['resultado'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "RESULT"); // teacher only
     });
 
@@ -48,7 +48,7 @@ function handel(controller, bot, message, method) {
 
     controller.storage.users.get(person, function(err, user) {
         if (!user) {
-            bot.reply(message, "Sorry. We don't share a classroom!");
+            bot.reply(message, "Desculpe. Nós não estamos em uma sala de aula compartilhada!");
             return;
         }
 
@@ -70,16 +70,16 @@ function handel(controller, bot, message, method) {
         bot.startConversation(message, function(err,convo) {
 
             var choice = "";
-            choice += "For which class?  \nReply with the number i.e. `1`, `2` etc. or `quit` to abort  \n  \n";
+            choice += "Para qual sala? \nEntrar com um número. Por exemplo,  `1`, `2` etc. ou `sair` para finalizar  \n  \n";
             for(var idy= 0; idy<rooms.length; idy++) {
                 choice += (idy+1) + ". " + rooms[idy].title +"  \n";
             }
 
             convo.addQuestion(choice,[
                 {
-                    pattern: 'quit',
+                    pattern: 'sair',
                     callback: function(response,convo) {
-                        convo.say('Aborted');
+                        convo.say('Finalizado');
                         convo.next();
                     }
                 },
@@ -126,30 +126,30 @@ function roomSelected(person, controller, bot, convo, method, opt, rooms) {
 
                     var tex_in = false;
 
-                    var qQ = 'Enter the poll question i.e. `Which day do you prefer?` or `quit` to abort';
-                    var oQ = 'Enter the options separated by semicolon i.e. `Sunday; Monday; Tuesday` or `quit` to abort';
+                    var qQ = 'Digite uma pergunta. `Qual dia você prefere?` ou `saair` para finalizar';
+                    var oQ = 'Digite as opções separando cada uma por ponto e vírgula. Por exemplo: `Sábado; Domingo; Segunda-feira` ou `sair` para finalizar';
 
                     if(method==="SET_TEX") {
                         tex_in = true;
 
-                        var tip = '**Remember**: This question will be parsed as Tex data, ' +
-                            '  \n- Use a backslash followed by a space to render a space' +
-                            '  \n- Use two backslashes for a new line'+
-                            '  \nGet help [here](https://www.codecogs.com/latex/eqneditor.php)'
+                        var tip = '**Lembrar**: Essa questão será convertida como um Tex, ' +
+                            '  \n- Use a barra invertida seguida de espaço para tornar um espaço' +
+                            '  \n-  Use duas vezes a barra invertida para uma nova linha'+
+                            '  \nConseguir ajuda [aqui](https://www.codecogs.com/latex/eqneditor.php)'
                         ;
 
-                        qQ = 'Enter the poll question in Tex or `quit` to abort  \n' + tip;
-                        qQ += "  \ni.e: `What\\ is\\ the\\ value\\ of\\int H(x,x')\\psi(x')dx'?`";
+                        qQ = 'Digite as perguntas en Tex ou `sair` para finalizar  \n' + tip;
+                        qQ += "  \ni.e: `Qual\\ é\\ o\\ valor\\ de\\int H(x,x')\\psi(x')dx'?`";
 
-                        oQ = 'Enter the options in Tex **separated by semicolon** or `quit` to abort  \n' + tip;
-                        oQ += "  \ni.e: `+V(x)\psi(x); -V(x)\psi(x); None\\ of\\ them`";
+                        oQ = 'Digite as opções em Tex **separado por ponto e vírgula** ou `sair` para finalizar  \n' + tip;
+                        oQ += "  \nPor exemplo: `+V(x)\psi(x); -V(x)\psi(x); Nenhum\\ deles`";
                     }
 
                     convo.ask(qQ, [
                         {
-                            pattern:  'quit',
-                            callback: function(response, convo) {
-                                convo.say('Aborted');
+                            pattern: 'sair',
+                            callback: function(response,convo) {
+                                convo.say('Finalizado');
                                 convo.next();
                             }
                         },
@@ -161,9 +161,9 @@ function roomSelected(person, controller, bot, convo, method, opt, rooms) {
                                 var ques = response.text;
                                 convo.ask(oQ, [
                                     {
-                                        pattern:  'quit',
-                                        callback: function(response, convo) {
-                                            convo.say('Aborted');
+                                        pattern: 'sair',
+                                        callback: function(response,convo) {
+                                            convo.say('Finalizado');
                                             convo.next();
                                         }
                                     },
@@ -186,12 +186,12 @@ function roomSelected(person, controller, bot, convo, method, opt, rooms) {
                                             });
 
                                             // notify everyone
-                                            bot.reply({channel: my_room.id}, 'New poll!  \nType `poll` in a **personal conversation** to respond');
+                                            bot.reply({channel: my_room.id}, ' Nova pergunta!  \nDigite `pergunta` em uma ** Conversa pessoal (1:1) para responder');
 
                                             // done
-                                            var confirmation = 'Poll set!';
+                                            var confirmation = 'Pergunta enviada!';
                                             //if(method==="SET")
-                                            confirmation+= "  \n[Download]("+ make_url(controller, ques, opts, tex_in) + ") this question to reuse later";
+                                            confirmation+= "  \n[Download]("+ make_url(controller, ques, opts, tex_in) + ") essa questão pode ser utilizada depois";
 
                                             convo.say(confirmation);
                                             convo.next();
@@ -225,7 +225,7 @@ function roomSelected(person, controller, bot, convo, method, opt, rooms) {
                     });
 
                     // done
-                    convo.say('Poll deleted');
+                    convo.say('Poll apagada');
                     convo.next();
                 }
                 else if(method==="RESULT") {
@@ -240,12 +240,12 @@ function roomSelected(person, controller, bot, convo, method, opt, rooms) {
 
                                 if(room.details.poll.tex) {
                                     var voteQ = {
-                                        text: "The poll  \n"+"Rendered by [CodeCogs](http://www.codecogs.com)",
+                                        text: "A pergunta \n"+"Por [CodeCogs](http://www.codecogs.com)",
                                         files: image_url(controller, room.details.poll.question, opts)
                                     }
                                 }
                                 else {
-                                    var voteQ = "The poll:  \n";
+                                    var voteQ = "A pergunta:  \n";
                                     voteQ += "**"+room.details.poll.question +"**  \n";
                                     for(var idt= 0; idt<opts.length; idt++) {
                                         voteQ += (idt+1) + ". " + opts[idt] +"  \n";
@@ -254,23 +254,23 @@ function roomSelected(person, controller, bot, convo, method, opt, rooms) {
 
                                 convo.say(voteQ);
 
-                                var res = "Total response:  "+ tol +"\n";
+                                var res = "Total respondido:  "+ tol +"\n";
                                 for (var k = 0; k<opts.length; k++) {
                                     if (vote_arr[k]) {
-                                        res += "* Option "+ (k+1) + ": " + vote_arr[k] + " vote(s) *"+ (vote_arr[k]/tol*100).toFixed(2) +"%*  \n";
+                                        res += "* Opções "+ (k+1) + ": " + vote_arr[k] + " voto(s) *"+ (vote_arr[k]/tol*100).toFixed(2) +"%*  \n";
                                     }
                                 }
                                 convo.say(res);
                             }
                             else {
-                                convo.say("No votes yet");
+                                convo.say("Ainda não foi votado");
                             }
                         }
                     });
                 }
             }
             else { //student
-                convo.say("Sorry. You are not authorized to set this information");
+                convo.say("Desculpe. Você não está autorizado a enviar essa informação");
             }
         }
         else if(method==="GET") {
@@ -298,20 +298,20 @@ function roomSelected(person, controller, bot, convo, method, opt, rooms) {
                 if (room) {
                     if(room.details.poll) {
 
-                        var getQ = "Reply with the number i.e. `1`, `2` etc. or `quit` to abort  \n";
+                        var getQ = " Responda com um número. Por exemplo: `1`, `2` etc. ou sair  \n";
                         if(my_room.teacher)
-                            getQ = "Active poll  \n";
+                            getQ = "Pergunta ativa \n";
 
                         var q = room.details.poll;
                         if(contains(q.voters, person)) {
-                            convo.say("You already answered!");
+                            convo.say("Você já respondeu!");
                         }
                         else {
                             var opts = room.details.poll.options.split(";");
 
                             if(q.tex) {
                                 var voteQ = {
-                                    text: getQ + "Rendered by [CodeCogs](http://www.codecogs.com)",
+                                    text: getQ + "Por [CodeCogs](http://www.codecogs.com)",
                                     files: image_url(controller, q.question, opts)
                                 }
                             }
@@ -329,9 +329,9 @@ function roomSelected(person, controller, bot, convo, method, opt, rooms) {
                             else {
                                 convo.addQuestion(voteQ,[
                                     {
-                                        pattern: 'quit',
+                                        pattern: 'sair',
                                         callback: function(response,convo) {
-                                            convo.say('Aborted');
+                                            convo.say('Finalizado');
                                             convo.next();
                                         }
                                     },
@@ -343,7 +343,7 @@ function roomSelected(person, controller, bot, convo, method, opt, rooms) {
                                             var vote = parseInt(response.text);
                                             if (vote >= 1 && vote <= opts.length) {
 
-                                                convo.say("Answer recorded 👍");
+                                                convo.say("Pergunta respondida 👍");
 
                                                 q.voters.push(person);
 
@@ -378,7 +378,7 @@ function roomSelected(person, controller, bot, convo, method, opt, rooms) {
                         }
                     }
                     else {
-                        convo.say("No active poll found!");
+                        convo.say("Nenhuma pergunta encontrada!");
                     }
                 }
             });
@@ -388,7 +388,7 @@ function roomSelected(person, controller, bot, convo, method, opt, rooms) {
         convo.next();
     }
     else {
-        convo.say("Pick a number from the list!");
+        convo.say("Entre com um número da lista!");
         // just repeat the question
         convo.repeat();
         convo.next();
@@ -397,7 +397,7 @@ function roomSelected(person, controller, bot, convo, method, opt, rooms) {
 
 function roomSelectedForFileParsing(person, controller, bot, convo, method, opt, rooms, file) {
 
-    console.log(TAG+ "file uri = " + file);
+    console.log(TAG+ "URI do arquivo= " + file);
 
     if(opt>=1 && opt<=rooms.length) {
 
@@ -412,7 +412,7 @@ function roomSelectedForFileParsing(person, controller, bot, convo, method, opt,
                 var options = {
                     url: file,
                     headers: {
-                        'Authorization': 'Bearer ' + controller.config.ciscospark_access_token
+                        'Autorizado': 'Bearer ' + controller.config.ciscospark_access_token
                     }
                 };
 
@@ -433,7 +433,7 @@ function roomSelectedForFileParsing(person, controller, bot, convo, method, opt,
                                 if(n<=2) {
                                     //todo; messgae undefined bug
                                     //convo.say("Not a valid `.docx` file!");
-                                    bot.reply({toPersonId: person}, "Not a valid `.docx` file!");
+                                    bot.reply({toPersonId: person}, "Não é um arquivo `.docx` válido!");
                                 }
                                 else {
                                     var texFile = false;
@@ -455,12 +455,12 @@ function roomSelectedForFileParsing(person, controller, bot, convo, method, opt,
                                     });
 
                                     // notify everyone
-                                    bot.reply({channel: room.id}, 'New poll!  \nType `poll` in a **personal conversation** to respond');
+                                    bot.reply({channel: room.id}, 'Nova pergunta!  \nDigite `pergunta` em uma **conversa pessoal (1:1)** para responder');
 
                                     // done
-                                    var voteQ = "Poll set";
+                                    var voteQ = "Pergunta enviada";
                                     //convo.say(voteQ);
-                                    bot.reply({toPersonId: person}, 'Poll set!');
+                                    bot.reply({toPersonId: person}, 'Pergunta enviada!');
                                 }
 
                                 fs.unlink(filename, function (err) {
@@ -473,20 +473,20 @@ function roomSelectedForFileParsing(person, controller, bot, convo, method, opt,
                     }
                     catch (e) {
                         //convo.say("Not a valid `.docx` file!");
-                        bot.reply({toPersonId: person}, "Not a valid `.docx` file!");
+                        bot.reply({toPersonId: person}, "Não é um arquivo `.docx` válido!");
                     }
                 });
 
             }
             else {
-                convo.say("This is not a `.docx` file!");
+                convo.say("Não é um arquivo `.docx` válido!");
             }
         });
 
         convo.next();
     }
     else {
-        convo.say("Pick a number from the list!");
+        convo.say("Entre com um número da lista!");
         // just repeat the question
         convo.repeat();
         convo.next();
