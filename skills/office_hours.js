@@ -10,7 +10,7 @@ module.exports = function(controller) {
         handel(controller, bot, message, "SET");
     });
 
-    controller.hears(['deletar expediente'], 'direct_message', function(bot, message) {
+    controller.hears(['apagar expediente'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "DELETE");
     });
 
@@ -41,7 +41,7 @@ function handel(controller, bot, message, method) {
         bot.startConversation(message, function(err,convo) {
 
             var choice = "";
-            choice += "Para qual sala?  \nReplicar com o número, ou seja, `1`, `2` etc. ou `sair` para finalizar  \n  \n";
+            choice += "Para qual sala?  \nDigitar um número, ou seja, `1`, `2` etc. ou `sair` para finalizar  \n  \n";
             for(var idy= 0; idy<rooms.length; idy++) {
                 choice += (idy+1) + ". " + rooms[idy].title +"  \n";
             }
@@ -115,7 +115,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                                 bot.reply({channel: room.id}, 'Novo expediente foi colocado para '+ response.text+'  \nDigite `expediente` em uma **conversa pessoal (1:1)** para consultar depois');
 
                                 // done
-                                convo.say('Expediente alterado');
+                                convo.say('Expediente enviado');
                                 convo.next();
                             }
                         }

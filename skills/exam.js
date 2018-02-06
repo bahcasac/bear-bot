@@ -15,7 +15,7 @@ module.exports = function(controller) {
         handel(controller, bot, message, "EDIT");
     });
 
-    controller.hears(['deletar exame'], 'direct_message', function(bot, message) {
+    controller.hears(['apagar exame'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "DELETE");
     });
 

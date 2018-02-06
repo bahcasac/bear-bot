@@ -10,7 +10,7 @@ module.exports = function(controller) {
         handel(controller, bot, message, "SET");
     });
 
-    controller.hears(['deletar resumo'], 'direct_message', function(bot, message) {
+    controller.hears(['apagar resumo'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "DELETE");
     });
 
@@ -48,9 +48,9 @@ function handel(controller, bot, message, method) {
 
             convo.addQuestion(choice,[
                 {
-                    pattern: 'quit',
+                    pattern: 'sair',
                     callback: function(response,convo) {
-                        convo.say('Aborted');
+                        convo.say('finalizar');
                         convo.next();
                     }
                 },
@@ -149,7 +149,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
             controller.storage.channels.get(room.id, function (err, room) {
                 if (room) {
                     if(room.details.syllabus) {
-                        convo.say("Link do resumo Link of the syllabus: "+ room.details.syllabus);
+                        convo.say("Link do resumo: "+ room.details.syllabus);
                     }
                     else {
                         convo.say("Link do resumo não foi enviado");

@@ -7,6 +7,6 @@ module.exports = function(controller) {
         bot.reply(message, "Feliz em ajudar 😃");
     });
     controller.hears(['ok', 'certo', 'consegui','ta bom', 'beleza'], 'direct_message', function(bot, message) {
-        bot.reply(message, "Certo 😃");
+        bot.reply(message, "Certo! 😃");
     });
 };

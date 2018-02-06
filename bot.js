@@ -3,7 +3,7 @@ env(__dirname + '/.env');
 
 
 if (!process.env.access_token) {
-    console.log('Error: Specify a Cisco Spark access_token in environment.');
+    console.log('Erro: Especifique um Cisco Spark access_token no ambiente.');
     process.exit(1);
 }
 
@@ -45,7 +45,7 @@ require("fs").readdirSync(normalizedPath).forEach(function(file) {
 });
 
 controller.hears(/./, 'direct_message', function(bot, message) {
-    bot.reply(message, "Didn't get you. Use `help` to see a list of available commands please.");
+    bot.reply(message, "Não entendi o que digitou. Digite `ajuda` para ver os comandos disponíveis, por favor.");
 });
 
 // notifier
@@ -69,7 +69,7 @@ var worker = new Worker(function () {
                         return console.log(err);
                     }
 
-                    var notice = "Reminder ⏰  \n";
+                    var notice = "Lembrete ⏰  \n";
                     var delever = false;
                     var offset = 0, offset_str=null;
                     if(room.details.timezone) {
@@ -94,7 +94,7 @@ var worker = new Worker(function () {
                     // due
                     if(room.details.due && room.details.due.length>0) {
                         dues = room.details.due;
-                        choice = "**Upcoming due:**  \n";
+                        choice = "**Próximas tarefas:**  \n";
                         cnt = 0;
                         for(idk= 0; idk<dues.length; idk++) {
                             given = new Date(dues[idk].time);

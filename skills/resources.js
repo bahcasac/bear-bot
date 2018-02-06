@@ -10,7 +10,7 @@ module.exports = function(controller) {
         handel(controller, bot, message, "SET");
     });
 
-    controller.hears(['deletar recursos'], 'direct_message', function(bot, message) {
+    controller.hears(['apagar recursos'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "DELETE");
     });
 

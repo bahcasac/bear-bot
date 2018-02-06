@@ -16,7 +16,7 @@ module.exports = function(controller) {
     });
 
     
-    controller.hears(['deletar notícias'], 'direct_message', function(bot, message) {
+    controller.hears(['apagar notícias'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "DELETE");
     });
 

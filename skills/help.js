@@ -25,20 +25,20 @@ module.exports = function(controller) {
                     bot.reply(message, "Aqui está uma lista completa de ações suportadas **para Professores**:  \n"
 
                     + "**Expediente**  \n"
-                    + "-`alterar/deletar expediente`: Para enviar ou deletar horas referentes as informações do escritório  \n"
+                    + "-`enviar/apagar expediente`: Para enviar ou apagar horas referentes as informações do escritório  \n"
                     + "-`expediente`: Informações sobre as horas do escritório  \n"
 
                     + "**Site para a Sala de Aula**  \n"
-                    + "-`set/delete website`: Enviar ou deletar informações de um curso  \n"
-                    + "-`website`: Conseguir informações sobre o site  \n"
+                    + "-`enviar/apagar site`: Enviar ou apagar informações de um curso  \n"
+                    + "-`site`: Conseguir informações sobre o site  \n"
 
                     + "**Link Resumo**  \n"
-                    + "-`enviar/deletar resumo`: Enviar ou deletar um link do resumo  \n"
+                    + "-`enviar/apagar resumo`: Enviar ou apagar um link do resumo  \n"
                     + "-`resumo`: Visualizar link do resmo  \n"
 
                     + "**Recursos do Curso**  \n"
-                    + "-`set/delete resources`: Enviar ou deletar um link de recursos do curso  \n"
-                    + "-`resources`: Pegar o link de recursos do curso  \n"
+                    + "-`set/delete recursos`: Enviar ou apagar um link de recursos do curso  \n"
+                    + "-`recursos`: Pegar o link de recursos do curso  \n"
 
 
                     + "**Tarefa**  \n"
@@ -46,16 +46,16 @@ module.exports = function(controller) {
                     + "-`tarefa`: Para pegar a lista das próximas tarefas  \n"
 
                     + "**Exame**  \n"
-                    + "-`add/update/delete exam`: Para exames (quiz, midterm, finals) avisos com título, descrição e data  \n"
-                    + "-`exam`: Para pegar a lista das próximas provas  \n"
+                    + "-`adicionar/atualizar/apagar exame`: Para exames (quiz, midterm, finals) avisos com título, descrição e data  \n"
+                    + "-`exame`: Para pegar a lista das próximas provas  \n"
 
                     + "**Evento**  \n"
-                    + "-`add/update/delete event`: Para eventos com título, descrição e data\n"
+                    + "-`adicionar/atualizar/apagar evento`: Para eventos com título, descrição e data  \n"
                     + "-`event`: Para pegar a lista dos próximos eventos  \n"
 
                     + "**Notícias**  \n"
-                    + "-`add/update/delete news`: Para importar anúncios e notificações  \n"
-                    + "-`news`: Para pegar a última informação  \n"
+                    + "-`adicionar/atualizar/apagar notícias`: Para importar anúncios e notificações  \n"
+                    + "-`notícias`: Para pegar a última informação  \n"
 
 
 
@@ -79,35 +79,35 @@ module.exports = function(controller) {
                     bot.reply(message, "Aqui está a lista de ações suportadas **para estudantes**:  \n"
 
                     + "**Horas do escritório**  \n"
-                    + "-`enviar/deletar expediente`: Para enviar ou deletar horas referentes as informações do escritório  \n"
+                    + "-`enviar/apagar expediente`: Para enviar ou apagar horas referentes as informações do escritório  \n"
                     + "-`expediente`: Informações sobre as horas do escritório  \n"
 
                     + "**Site do Curso**  \n"
-                    + "-`enviar/deletar site set/delete website`: Enviar ou deletar informações de um curso  \n"
+                    + "-`enviar/apagar site set/apagar site`: Enviar ou apagar informações de um curso  \n"
                     + "-`site`: Conseguir informações sobre o site  \n"
 
                     + "**Resumo**  \n"
-                    + "-`enviar/deletar resumo`: Enviar ou deletar um link no syllabus  \n"
+                    + "-`enviar/apagar resumo`: Enviar ou apagar um link no syllabus  \n"
                     + "-`Resumo`: Conseguir um link no syllabus  \n"
 
                     + "**Recursos do Curso**  \n"
-                    + "-`enviar/deletar recursos`: Enviar ou deletar um link de recursos do curso  \n"
+                    + "-`enviar/apagar recursos`: Enviar ou apagar um link de recursos do curso  \n"
                     + "-`recursos`: Pegar o link de recursos do curso  \n"
 
                     + "**Tarefa**  \n"
-                    + "-`adicionar/alterar/deletar tarefa`: Para tarefas com título, descrição e data  \n"
+                    + "-`adicionar/alterar/apagar tarefa`: Para tarefas com título, descrição e data  \n"
                     + "-`tarefa`: Para pegar a lista das próximas tarefas \n"
 
                     + "**Prova**  \n"
-                    + "-`adicionar/alterar/deletar prova`: Para provas (quiz, midterm, finals) avisos com título, descrição e data  \n"
+                    + "-`adicionar/alterar/apagar prova`: Para provas (quiz, midterm, finals) avisos com título, descrição e data  \n"
                     + "-`prova`: Para pegar a lista das próximas provas  \n"
 
                     + "**Evento**  \n"
-                    + "-`adicionar/alterar/deletar evento`: Para eventos com título, descrição e data  \n"
+                    + "-`adicionar/alterar/apagar evento`: Para eventos com título, descrição e data  \n"
                     + "-`evento`: Para pegar a lista dos próximos eventos  \n"
 
                     + "**Notícias**  \n"
-                    + "-`adcionar/alterar/deletar notícias`: Para importar anúncios e notificações  \n"
+                    + "-`adcionar/alterar/apagar notícias`: Para importar anúncios e notificações  \n"
                     + "-`notícias`: Para pegar a última informação  \n"
 
                         + "**Pergunta**  \n"

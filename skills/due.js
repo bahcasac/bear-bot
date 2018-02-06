@@ -15,7 +15,7 @@ module.exports = function(controller) {
         handel(controller, bot, message, "EDIT");
     });
 
-    controller.hears(['deletar tarefa'], 'direct_message', function(bot, message) {
+    controller.hears(['apagar tarefa'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "DELETE");
     });
 
@@ -48,7 +48,7 @@ function handel(controller, bot, message, method) {
         bot.startConversation(message, function(err,convo) {
 
             var choice = "";
-            choice += "De qual classe?  \nDigitar com um número. Por exemplo, '1', '2' etc ou `sair` para finalizar  \n  \n";
+            choice += "De qual classe? \nDigitar com um número. Por exemplo, '1', '2' etc ou `sair` para finalizar  \n  \n";
             for(var idy= 0; idy<rooms.length; idy++) {
                 choice += (idy+1) + ". " + rooms[idy].title +"  \n";
             }
@@ -269,7 +269,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                                             convo.next();
                                         }
                                         else {
-                                            convo.say("Escolha um número da lista!");
+                                            convo.say("Por favor, escolha um número da lista!");
                                             // just repeat the question
                                             convo.repeat();
                                             convo.next();
@@ -301,7 +301,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
             controller.storage.channels.get(room.id, function (err, room) {
                 if (room) {
                     if(room.details.due && room.details.due.length>0) {
-
+                        //values of the room that have the due into var dues
                         var dues = room.details.due;
 
                         var offset = 0, offset_str=null;
@@ -324,24 +324,26 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
 
 
                         // TODO: add to cal
-                        var choice = "**Atualizar tarefa:**  \n";
+                        var choice = "**Tarefas:**  \n";
                         var cnt = 0;
+                        
                         for(var idk= 0; idk<dues.length; idk++) {
 
                             var given = new Date(dues[idk].time);
-
+                            
                             //console.log(JSON.stringify(given)+"\n\n"+JSON.stringify(nd));
 
                             if(given.getTime() >= nd.getTime()) {
                                 cnt++;
-                                choice += "**"+ cnt + ". " + dues[idk].name +"**  \n"+dues[idk].description+"  \n"+"Date: "+dues[idk].time+"  \n";
+                                choice += "**"+ cnt + ". " + dues[idk].name +"**  \n"+dues[idk].description+"  \n"+"Data: "+dues[idk].time+"  \n";
                             }
                         }
+                    
 
                         convo.say(choice);
                     }
                     else {
-                        convo.say("Não encontrado");
+                        convo.say("Sem tarefas!");
                     }
                 }
             });

@@ -90,7 +90,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
 
                             // post
                             if (!wordfilter.blacklisted(response.text)) {
-                                bot.reply({channel: room.id}, '**Anonymous Student:**  \n'+ response.text);
+                                bot.reply({channel: room.id}, '**Estudante Anônimos:**  \n'+ response.text);
                                 convo.say('Post anônimo!');
                             } else {
                                 convo.say('Post bloqueado por linguagem ofensiva');
