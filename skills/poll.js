@@ -126,7 +126,7 @@ function roomSelected(person, controller, bot, convo, method, opt, rooms) {
 
                     var tex_in = false;
 
-                    var qQ = 'Digite uma pergunta. `Qual dia você prefere?` ou `saair` para finalizar';
+                    var qQ = 'Digite uma pergunta. `Qual dia você prefere?` ou `sair` para finalizar';
                     var oQ = 'Digite as opções separando cada uma por ponto e vírgula. Por exemplo: `Sábado; Domingo; Segunda-feira` ou `sair` para finalizar';
 
                     if(method==="SET_TEX") {
@@ -300,7 +300,7 @@ function roomSelected(person, controller, bot, convo, method, opt, rooms) {
 
                         var getQ = " Responda com um número. Por exemplo: `1`, `2` etc. ou sair  \n";
                         if(my_room.teacher)
-                            getQ = "Pergunta ativa \n";
+                            getQ = "Pergunta ativa  \n";
 
                         var q = room.details.poll;
                         if(contains(q.voters, person)) {

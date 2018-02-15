@@ -6,15 +6,15 @@ const TAG = "meha, office_hour.js: ";
 
 
 module.exports = function(controller) {
-    controller.hears(['enviar expediente'], 'direct_message', function(bot, message) {
+    controller.hears(['enviar atividade extra-classe'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "SET");
     });
 
-    controller.hears(['apagar expediente'], 'direct_message', function(bot, message) {
+    controller.hears(['apagar atividade extra-classe'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "DELETE");
     });
 
-    controller.hears(['expediente'], 'direct_message', function(bot, message) {
+    controller.hears(['atividade extra-classe'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "GET");
     });
 
@@ -58,7 +58,7 @@ function handel(controller, bot, message, method) {
                     pattern: new RegExp(/^\d+$/),
                     callback: function(response,convo) {
 
-                        // console.log("%d => "+ JSON.stringify(response));
+                        // console.log("%d => "+ JSAN.stringify(response));
                         var opt = parseInt(response.text);
                         roomSelected(controller, bot, convo, method, opt, rooms);
 
@@ -88,7 +88,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
             if (room.teacher) {
 
                 if(method==="SET") {
-                    convo.ask('Entre com o expediente, por exemplo: `MTF 9am-11am` ou `sair` para finalizar', [
+                    convo.ask('Entre com a atividade extra-classe, por exemplo: `MTF 9am-11am` ou `sair` para finalizar', [
                         {
                             pattern:  'sair',
                             callback: function(response, convo) {
@@ -112,10 +112,10 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                                 });
 
                                 // notify everyone
-                                bot.reply({channel: room.id}, 'Novo expediente foi colocado para '+ response.text+'  \nDigite `expediente` em uma **conversa pessoal (1:1)** para consultar depois');
+                                bot.reply({channel: room.id}, 'Nova atividade extra-classe foi colocada para '+ response.text+'  \nDigite `atividade extra-classe` em uma **conversa pessoal (1:1)** para consultar depois');
 
                                 // done
-                                convo.say('Expediente enviado');
+                                convo.say('atividade extra-classe enviada');
                                 convo.next();
                             }
                         }
@@ -131,12 +131,12 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                             });
 
                             //notify everyone
-                            bot.reply({channel: room.id}, 'O expediente foi removido');
+                            bot.reply({channel: room.id}, 'A atividade extra-classe foi removida');
                         }
                     });
 
                     // done
-                    convo.say('Expediente removido');
+                    convo.say('atividade extra-classe removida');
                     convo.next();
                 }
             }
@@ -152,7 +152,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                         convo.say(room.details.office_hours);
                     }
                     else {
-                        convo.say("Expediente não foi alterado");
+                        convo.say("atividade extra-classe não foi alterada");
                     }
                 }
             });

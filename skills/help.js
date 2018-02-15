@@ -22,7 +22,7 @@ module.exports = function(controller) {
                 }
 
                 if(teacher>0) {
-                    bot.reply(message, "Aqui está uma lista completa de ações suportadas **para Professores**:  \n"
+                    bot.reply(message, "Aqui está uma lista completa de ações **para Professores**:  \n"
 
                     + "**Expediente**  \n"
                     + "-`enviar/apagar expediente`: Para enviar ou apagar horas referentes as informações do escritório  \n"
@@ -37,7 +37,7 @@ module.exports = function(controller) {
                     + "-`resumo`: Visualizar link do resmo  \n"
 
                     + "**Recursos do Curso**  \n"
-                    + "-`set/delete recursos`: Enviar ou apagar um link de recursos do curso  \n"
+                    + "-`enviar/deletar recursos`: Enviar ou apagar um link de recursos do curso  \n"
                     + "-`recursos`: Pegar o link de recursos do curso  \n"
 
 
@@ -51,7 +51,7 @@ module.exports = function(controller) {
 
                     + "**Evento**  \n"
                     + "-`adicionar/atualizar/apagar evento`: Para eventos com título, descrição e data  \n"
-                    + "-`event`: Para pegar a lista dos próximos eventos  \n"
+                    + "-`evento`: Para pegar a lista dos próximos eventos  \n"
 
                     + "**Notícias**  \n"
                     + "-`adicionar/atualizar/apagar notícias`: Para importar anúncios e notificações  \n"
