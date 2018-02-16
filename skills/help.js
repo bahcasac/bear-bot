@@ -24,9 +24,9 @@ module.exports = function(controller) {
                 if(teacher>0) {
                     bot.reply(message, "Aqui está uma lista completa de ações **para Professores**:  \n"
 
-                    + "**Expediente**  \n"
-                    + "-`enviar/apagar expediente`: Para enviar ou apagar horas referentes as informações do escritório  \n"
-                    + "-`expediente`: Informações sobre as horas do escritório  \n"
+                    + "**Atividade extra-classe**  \n"
+                    + "-`enviar/apagar atividade extra-classe`: Para enviar ou apagar horas referentes as informações do escritório  \n"
+                    + "-`atividade extra-classe`: Informações sobre as horas do escritório  \n"
 
                     + "**Site para a Sala de Aula**  \n"
                     + "-`enviar/apagar site`: Enviar ou apagar informações de um curso  \n"
@@ -78,9 +78,9 @@ module.exports = function(controller) {
                 if(student>0) {
                     bot.reply(message, "Aqui está a lista de ações suportadas **para estudantes**:  \n"
 
-                    + "**Horas do escritório**  \n"
-                    + "-`enviar/apagar expediente`: Para enviar ou apagar horas referentes as informações do escritório  \n"
-                    + "-`expediente`: Informações sobre as horas do escritório  \n"
+                    + "**Atividade extra-classe**  \n"
+                    + "-`enviar/apagar atividade extra-classe`: Para enviar ou apagar horas referentes as informações do escritório  \n"
+                    + "-`atividade extra-classe`: Informações sobre as horas do escritório  \n"
 
                     + "**Site do Curso**  \n"
                     + "-`enviar/apagar site set/apagar site`: Enviar ou apagar informações de um curso  \n"
