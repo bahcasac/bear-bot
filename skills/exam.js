@@ -6,21 +6,21 @@ const TAG = "meha, exam.js: ";
 var Util = require("../components/util.js");
 
 module.exports = function(controller) {
-    controller.hears(['adicionar exame', 'enviar exame'], 'direct_message', function(bot, message) {
+    controller.hears(['adicionar prova', 'enviar prova'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "SET");
     });
 
 
-    controller.hears(['atualizar exame', 'editar exame'], 'direct_message', function(bot, message) {
+    controller.hears(['atualizar prova', 'editar prova'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "EDIT");
     });
 
-    controller.hears(['apagar exame'], 'direct_message', function(bot, message) {
+    controller.hears(['apagar prova'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "DELETE");
     });
 
 
-    controller.hears(['exame'], 'direct_message', function(bot, message) {
+    controller.hears(['prova'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "GET");
     });
 
@@ -87,8 +87,8 @@ function handel(controller, bot, message, method) {
 
 function form(controller, bot, convo, room, idx, due) {
 
-    var nameQ = 'Digitar um nome, por exemplo: `Termo #1` ou  `sair` para finalizar';
-    var descQ = 'Digitar a descrição. Por exemplo: `Capítulo 1 até 6` ou sair para finalizar';
+    var nameQ = 'Digitar um nome, por exemplo: `Prova 1 de Matemática` ou  `sair` para finalizar';
+    var descQ = 'Digitar a descrição. Por exemplo: `Estudar capítulo 1 até 6` ou sair para finalizar';
     var timeQ = 'Digitar a data no formato AAAA-MM-DD HH-MM. Por exemplo, `2018-01-12 10:00` ou `sair` para finalizar';
     if(due) {
         nameQ += "  \n  \n*Atual: "+due.name+"*";

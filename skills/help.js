@@ -25,49 +25,49 @@ module.exports = function(controller) {
                     bot.reply(message, "Aqui está uma lista completa de ações **para Professores**:  \n"
 
                     + "**Atividade extra-classe**  \n"
-                    + "-`enviar/apagar atividade extra-classe`: Para enviar ou apagar horas referentes as informações do escritório  \n"
+                    + "-`enviar/apagar atividade extra-classe`: Para enviar ou apagar uma atividade já enviada  \n"
                     + "-`atividade extra-classe`: Informações sobre as horas do escritório  \n"
 
                     + "**Site para a Sala de Aula**  \n"
                     + "-`enviar/apagar site`: Enviar ou apagar informações de um curso  \n"
                     + "-`site`: Conseguir informações sobre o site  \n"
 
-                    + "**Link Resumo**  \n"
+                    + "**Link para Resumo**  \n"
                     + "-`enviar/apagar resumo`: Enviar ou apagar um link do resumo  \n"
                     + "-`resumo`: Visualizar link do resmo  \n"
 
-                    + "**Recursos do Curso**  \n"
+                    + "**Links para Estudo**  \n"
                     + "-`enviar/deletar recursos`: Enviar ou apagar um link de recursos do curso  \n"
                     + "-`recursos`: Pegar o link de recursos do curso  \n"
 
 
                     + "**Tarefa**  \n"
                     + "-`adicionar/atualizar/apagar tarefa`: Para tarefas com título, descrição e data  \n"
-                    + "-`tarefa`: Para pegar a lista das próximas tarefas  \n"
+                    + "-`tarefa`: Para visualizar a lista das próximas tarefas  \n"
 
-                    + "**Exame**  \n"
-                    + "-`adicionar/atualizar/apagar exame`: Para exames (quiz, midterm, finals) avisos com título, descrição e data  \n"
-                    + "-`exame`: Para pegar a lista das próximas provas  \n"
+                    + "**Prova**  \n"
+                    + "-`adicionar/atualizar/apagar prova`: Para provas (título, descrição e data)  \n"
+                    + "-`prova`: Para visualizar a lista das próximas provas  \n"
 
                     + "**Evento**  \n"
                     + "-`adicionar/atualizar/apagar evento`: Para eventos com título, descrição e data  \n"
-                    + "-`evento`: Para pegar a lista dos próximos eventos  \n"
+                    + "-`evento`: Para visualizar a lista dos próximos eventos  \n"
 
                     + "**Notícias**  \n"
                     + "-`adicionar/atualizar/apagar notícias`: Para importar anúncios e notificações  \n"
-                    + "-`notícias`: Para pegar a última informação  \n"
+                    + "-`notícias`: Para visualizar a última informação  \n"
 
 
 
                     + "**Pergunta**  \n"
                     + "-`enviar/apagar pergunta `: Para questões do espaço ou das pergunta  \n"
-                    + "-`enviar pergunta` com `.docx` com arquivo anexado: Cria uma pergunta do arquivo  \n"
-                    + "-`enviar pergunta com tex`: Criar uma pergunta com equações Latex Create pergunta with Latex equations  \n"
+                    // + "-`enviar pergunta` com `.docx` com arquivo anexado: Cria uma pergunta do arquivo  \n"
+                    // + "-`enviar pergunta com tex`: Criar uma pergunta com equações Latex  \n"
                     + "-`pergunta`: Visualizar a pergunta ativa  \n"
                     + "-`resultado`: Gerar resultado de uma pergunta ativa  \n"
 
                     + "**Configurações**  \n"
-                    + "-`enviar fuso horário set timezone`: Enviar um fuso-horário, todas as consultas e lembretes vão disparar de acordo com isso.  \n"
+                    + "-`enviar fuso horário`: Enviar um fuso-horário, todas as consultas e lembretes vão disparar de acordo com isso.  \n"
                     + "-`fuso horário`: Exibir o fuso-horário atual  \n"
                     + "-`tornar administrador`: Dar a alguém o privilégio de administrador (usar o e-mail)  \n"
                     + "-`remover administrador`: Remover o privilégio de administrador (usar o e-mail)   \n"
@@ -83,12 +83,12 @@ module.exports = function(controller) {
                     + "-`atividade extra-classe`: Informações sobre as horas do escritório  \n"
 
                     + "**Site do Curso**  \n"
-                    + "-`enviar/apagar site set/apagar site`: Enviar ou apagar informações de um curso  \n"
+                    + "-`enviar/apagar site`: Enviar ou apagar informações de um curso  \n"
                     + "-`site`: Conseguir informações sobre o site  \n"
 
                     + "**Resumo**  \n"
-                    + "-`enviar/apagar resumo`: Enviar ou apagar um link no syllabus  \n"
-                    + "-`Resumo`: Conseguir um link no syllabus  \n"
+                    + "-`enviar/apagar resumo`: Enviar ou apagar o link para resumo  \n"
+                    + "-`Resumo`: Visualizar o link do resumo  \n"
 
                     + "**Recursos do Curso**  \n"
                     + "-`enviar/apagar recursos`: Enviar ou apagar um link de recursos do curso  \n"
@@ -96,19 +96,19 @@ module.exports = function(controller) {
 
                     + "**Tarefa**  \n"
                     + "-`adicionar/alterar/apagar tarefa`: Para tarefas com título, descrição e data  \n"
-                    + "-`tarefa`: Para pegar a lista das próximas tarefas \n"
+                    + "-`tarefa`: Para visualizar a lista das próximas tarefas \n"
 
                     + "**Prova**  \n"
-                    + "-`adicionar/alterar/apagar prova`: Para provas (quiz, midterm, finals) avisos com título, descrição e data  \n"
-                    + "-`prova`: Para pegar a lista das próximas provas  \n"
+                    + "-`adicionar/alterar/apagar prova`: Para provas (título, descrição e data)  \n"
+                    + "-`prova`: Para visualizar a lista das próximas provas  \n"
 
                     + "**Evento**  \n"
-                    + "-`adicionar/alterar/apagar evento`: Para eventos com título, descrição e data  \n"
-                    + "-`evento`: Para pegar a lista dos próximos eventos  \n"
+                    + "-`adicionar/alterar/apagar evento`: Para eventos (título, descrição e data)  \n"
+                    + "-`evento`: Para visualizar a lista dos próximos eventos  \n"
 
                     + "**Notícias**  \n"
                     + "-`adcionar/alterar/apagar notícias`: Para importar anúncios e notificações  \n"
-                    + "-`notícias`: Para pegar a última informação  \n"
+                    + "-`notícias`: Para visualizar a última informação  \n"
 
                         + "**Pergunta**  \n"
                         + "-`pergunta: Questões de participantes anônimos da sala de aula  \n"

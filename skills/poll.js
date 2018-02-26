@@ -70,7 +70,7 @@ function handel(controller, bot, message, method) {
         bot.startConversation(message, function(err,convo) {
 
             var choice = "";
-            choice += "Para qual sala? \nEntrar com um número. Por exemplo,  `1`, `2` etc. ou `sair` para finalizar  \n  \n";
+            choice += "Para qual sala?  \n Entrar com um número. Por exemplo,  `1`, `2` etc. ou `sair` para finalizar  \n  \n";
             for(var idy= 0; idy<rooms.length; idy++) {
                 choice += (idy+1) + ". " + rooms[idy].title +"  \n";
             }
@@ -126,7 +126,7 @@ function roomSelected(person, controller, bot, convo, method, opt, rooms) {
 
                     var tex_in = false;
 
-                    var qQ = 'Digite uma pergunta. `Qual dia você prefere?` ou `sair` para finalizar';
+                    var qQ = 'Digite uma pergunta. Exemplo: `Quais são as principais camadas da pele?` ou `sair` para finalizar';
                     var oQ = 'Digite as opções separando cada uma por ponto e vírgula. Por exemplo: `Sábado; Domingo; Segunda-feira` ou `sair` para finalizar';
 
                     if(method==="SET_TEX") {
@@ -191,7 +191,7 @@ function roomSelected(person, controller, bot, convo, method, opt, rooms) {
                                             // done
                                             var confirmation = 'Pergunta enviada!';
                                             //if(method==="SET")
-                                            confirmation+= "  \n[Download]("+ make_url(controller, ques, opts, tex_in) + ") essa questão pode ser utilizada depois";
+                                            confirmation+= "Fazer o   \n[Download]("+ make_url(controller, ques, opts, tex_in) + ") dessa questão para poder ser utilizada depois";
 
                                             convo.say(confirmation);
                                             convo.next();
@@ -300,7 +300,7 @@ function roomSelected(person, controller, bot, convo, method, opt, rooms) {
 
                         var getQ = " Responda com um número. Por exemplo: `1`, `2` etc. ou sair  \n";
                         if(my_room.teacher)
-                            getQ = "Pergunta ativa  \n";
+                            getQ = "Última pergunta  \n";
 
                         var q = room.details.poll;
                         if(contains(q.voters, person)) {
@@ -455,7 +455,7 @@ function roomSelectedForFileParsing(person, controller, bot, convo, method, opt,
                                     });
 
                                     // notify everyone
-                                    bot.reply({channel: room.id}, 'Nova pergunta!  \nDigite `pergunta` em uma **conversa pessoal (1:1)** para responder');
+                                    bot.reply({channel: room.id}, 'Nova pergunta!  \n Digite `pergunta` em uma **conversa pessoal (1:1)** para responder');
 
                                     // done
                                     var voteQ = "Pergunta enviada";

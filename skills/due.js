@@ -87,9 +87,9 @@ function handel(controller, bot, message, method) {
 
 function form(controller, bot, convo, room, idx, due) {
 
-    var nameQ = 'Digitar um nome, por exemplo: `Lista de Estudos  #1` ou `sair` para finalizar';
-    var descQ = 'Digitar uma descrição, por exemplo: `Leia o capítulo 1 & 2 e responta a questão deste link: https:foo.bar` ou `sair` para finalizar';
-    var timeQ = 'Enter due date in YYYY-MM-DD HH-MM format i.e. `2017-12-12 23:59` or `quit` to abort';
+    var nameQ = 'Digite um nome, por exemplo: `Lista de Estudos  #1` ou `sair` para finalizar';
+    var descQ = 'Digite uma descrição, por exemplo: `Leia o capítulo 1 & 2 e responta questão deste link: https:teste.com` ou `sair` para finalizar';
+    var timeQ = 'Digite a data AAAA-MM-DD HH:MM. Por exemplo: `2018-12-12 23:59` ou sair para finalizar';
     if(due) {
         nameQ += "  \n  \n*Atual: "+due.name+"*";
         descQ += "  \n  \n*Atual: "+due.description+"*";

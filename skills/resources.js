@@ -6,15 +6,15 @@ const TAG = "meha, office_hour.js: ";
 
 
 module.exports = function(controller) {
-    controller.hears(['enviar recursos'], 'direct_message', function(bot, message) {
+    controller.hears(['enviar links para estudo'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "SET");
     });
 
-    controller.hears(['apagar recursos'], 'direct_message', function(bot, message) {
+    controller.hears(['apagar links para estudo'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "DELETE");
     });
 
-    controller.hears(['recursos'], 'direct_message', function(bot, message) {
+    controller.hears(['links para estudo'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "GET");
     });
 
@@ -88,7 +88,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
             if (room.teacher) {
 
                 if(method==="SET") {
-                    convo.ask('Enviar o link da página de Recurso ou `sair` para finalizar', [
+                    convo.ask('Enviar o link  ou `sair` para finalizar', [
                         {
                             pattern: 'sair',
                             callback: function(response, convo) {
@@ -111,10 +111,10 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                                 });
 
                                 // notify everyone
-                                bot.reply({channel: room.id}, 'Novo link de Recurso foi enviado para '+ response.text+'  \nDigite `recursos` em uma **conversa pessoal (1:1)** para consultar depois');
+                                bot.reply({channel: room.id}, 'Novo link foi enviado para '+ response.text+'  \nDigite `links para estudo` em uma **conversa pessoal (1:1)** para consultar depois');
 
                                 // done
-                                convo.say('Link de recurso enviado');
+                                convo.say('Link enviado');
                                 convo.next();
                             }
                         }
@@ -130,7 +130,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                             });
 
                             //notify everyone
-                            bot.reply({channel: room.id}, 'Link do Recurso foi removido');
+                            bot.reply({channel: room.id}, 'Link foi removido');
                         }
                     });
 

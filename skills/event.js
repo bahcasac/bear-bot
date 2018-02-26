@@ -87,8 +87,8 @@ function handel(controller, bot, message, method) {
 
 function form(controller, bot, convo, room, idx, due) {
 
-    var nameQ = 'Digite um nome, por exemplo: `Viagem da Fábrica em Agosto` ou `sair` para finalizar';
-    var descQ = 'Digite uma descrição, por exemplo: `Aqui está um plano completo: foo.bar` ou `sair` para finalizar';
+    var nameQ = 'Digite um nome, por exemplo: `Visita ao museu de artes` ou `sair` para finalizar';
+    var descQ = 'Digite uma descrição, por exemplo: `Estudos de obras de artes` ou `sair` para finalizar';
     var timeQ = 'Digite a data de um evento no formato AAAA-MM-DD HH-MM. Por Exemplo, `2018-01-12 23:59` ou `sair` para finalizar';
     if(due) {
         nameQ += "  \n  \n*Atual: "+due.name+"*";

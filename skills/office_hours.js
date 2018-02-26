@@ -88,7 +88,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
             if (room.teacher) {
 
                 if(method==="SET") {
-                    convo.ask('Entre com a atividade extra-classe, por exemplo: `MTF 9am-11am` ou `sair` para finalizar', [
+                    convo.ask('Entre com a atividade extra-classe, por exemplo: `Aula de futebol 9am-11am` ou `sair` para finalizar', [
                         {
                             pattern:  'sair',
                             callback: function(response, convo) {
@@ -112,7 +112,7 @@ function roomSelected(controller, bot, convo, method, opt, rooms) {
                                 });
 
                                 // notify everyone
-                                bot.reply({channel: room.id}, 'Nova atividade extra-classe foi colocada para '+ response.text+'  \nDigite `atividade extra-classe` em uma **conversa pessoal (1:1)** para consultar depois');
+                                bot.reply({channel: room.id}, 'Nova atividade extra-classe  '+ response.text+'  \nDigite `atividade extra-classe` em uma **conversa pessoal (1:1)** para consultar depois');
 
                                 // done
                                 convo.say('atividade extra-classe enviada');

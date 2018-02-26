@@ -6,17 +6,17 @@ const TAG = "meha, website.js: ";
 
 
 module.exports = function(controller) {
-    // controller.hears(['enviar site'], 'direct_message', function(bot, message) {
-    //     handel(controller, bot, message, "SET");
-    // });
+    controller.hears(['enviar site'], 'direct_message', function(bot, message) {
+        handel(controller, bot, message, "SET");
+    });
 
-    // controller.hears(['apagar site'], 'direct_message', function(bot, message) {
-    //     handel(controller, bot, message, "DELETE");
-    // });
+    controller.hears(['apagar site'], 'direct_message', function(bot, message) {
+        handel(controller, bot, message, "DELETE");
+    });
 
-    // controller.hears(['site'], 'direct_message', function(bot, message) {
-    //     handel(controller, bot, message, "GET");
-    // });
+    controller.hears(['site'], 'direct_message', function(bot, message) {
+        handel(controller, bot, message, "GET");
+    });
 
 };
 
