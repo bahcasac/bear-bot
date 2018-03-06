@@ -32,13 +32,13 @@ module.exports = function(controller) {
                     + "-`enviar/apagar site`: Enviar ou apagar informações de um curso  \n"
                     + "-`site`: Conseguir informações sobre o site  \n"
 
-                    + "**Link para Resumo**  \n"
+                    + "**Links para Resumo**  \n"
                     + "-`enviar/apagar resumo`: Enviar ou apagar um link do resumo  \n"
                     + "-`resumo`: Visualizar link do resmo  \n"
 
                     + "**Links para Estudo**  \n"
-                    + "-`enviar/deletar recursos`: Enviar ou apagar um link de recursos do curso  \n"
-                    + "-`recursos`: Pegar o link de recursos do curso  \n"
+                    + "-`enviar/deletar estudos`: Enviar ou apagar um link de estudo do curso  \n"
+                    + "-`estudos`: Pegar o link de recursos do curso  \n"
 
 
                     + "**Tarefa**  \n"
@@ -78,43 +78,38 @@ module.exports = function(controller) {
                 if(student>0) {
                     bot.reply(message, "Aqui está a lista de ações suportadas **para estudantes**:  \n"
 
-                    + "**Atividade extra-classe**  \n"
-                    + "-`enviar/apagar atividade extra-classe`: Para enviar ou apagar horas referentes as informações do escritório  \n"
-                    + "-`atividade extra-classe`: Informações sobre as horas do escritório  \n"
+                    + "**Atividades Extra-classe**  \n"
+                    + "-`Atividade Extra-classe`: Para visualizar as informações  \n"
 
-                    + "**Site do Curso**  \n"
-                    + "-`enviar/apagar site`: Enviar ou apagar informações de um curso  \n"
-                    + "-`site`: Conseguir informações sobre o site  \n"
+                    + "**Site para a Sala de Aula**  \n"
+                    + "-`site`: Para visualizar as informações  \n"
 
-                    + "**Resumo**  \n"
-                    + "-`enviar/apagar resumo`: Enviar ou apagar o link para resumo  \n"
-                    + "-`Resumo`: Visualizar o link do resumo  \n"
+                    + "**Links para Resumo**  \n"
+                    + "-`Resumo`: Para visualizar link de resumo  \n"
 
-                    + "**Recursos do Curso**  \n"
-                    + "-`enviar/apagar recursos`: Enviar ou apagar um link de recursos do curso  \n"
-                    + "-`recursos`: Pegar o link de recursos do curso  \n"
+                    + "**Links para Estudo**  \n"
+                    + "-`estudos`: Para visualizar os links para estudo  \n"
+
+                    + "**Fuso Horário**  \n"
+                    + "-`Fuso horário`: Oara visualizar o fuso horário atual  \n"
+
+
 
                     + "**Tarefa**  \n"
-                    + "-`adicionar/alterar/apagar tarefa`: Para tarefas com título, descrição e data  \n"
-                    + "-`tarefa`: Para visualizar a lista das próximas tarefas \n"
+                    + "-`tarefa`: Para visualizar a lista de tarefas  \n"
 
                     + "**Prova**  \n"
-                    + "-`adicionar/alterar/apagar prova`: Para provas (título, descrição e data)  \n"
                     + "-`prova`: Para visualizar a lista das próximas provas  \n"
 
                     + "**Evento**  \n"
-                    + "-`adicionar/alterar/apagar evento`: Para eventos (título, descrição e data)  \n"
                     + "-`evento`: Para visualizar a lista dos próximos eventos  \n"
 
-                    + "**Notícias**  \n"
-                    + "-`adcionar/alterar/apagar notícias`: Para importar anúncios e notificações  \n"
-                    + "-`notícias`: Para visualizar a última informação  \n"
+                    + "**Notícas**  \n"
+                    + "-`notícias`: Para visualizar as últimas notícias  \n"
 
-                        + "**Pergunta**  \n"
-                        + "-`pergunta: Questões de participantes anônimos da sala de aula  \n"
 
-                        + "**Gupo de post anônimo**  \n"
-                        + "-`post`: Post anônimo de uma questão  \n"
+                    + "**Pergunta**  \n"
+                    + "-`pergunta`: Para visualizar as perguntas que foram feitas  \n"
 
                     );
                 }

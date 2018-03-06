@@ -6,15 +6,15 @@ const TAG = "meha, office_hour.js: ";
 
 
 module.exports = function(controller) {
-    controller.hears(['enviar links para estudo'], 'direct_message', function(bot, message) {
+    controller.hears(['enviar estudos'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "SET");
     });
 
-    controller.hears(['apagar links para estudo'], 'direct_message', function(bot, message) {
+    controller.hears(['apagar estudos'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "DELETE");
     });
 
-    controller.hears(['links para estudo'], 'direct_message', function(bot, message) {
+    controller.hears(['estudos'], 'direct_message', function(bot, message) {
         handel(controller, bot, message, "GET");
     });
 
