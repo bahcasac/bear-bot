@@ -45,7 +45,7 @@ require("fs").readdirSync(normalizedPath).forEach(function(file) {
 });
 
 controller.hears(/./, 'direct_message', function(bot, message) {
-    bot.reply(message, "Didn't get you. Use `help` to see a list of available commands please.");
+    bot.reply(message, "Não entendi o qu digitou. Digite `ajuda` para visualizar a lista de comandos disponíveis.");
 });
 
 // notifier
