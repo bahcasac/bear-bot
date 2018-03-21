@@ -23,7 +23,7 @@ module.exports = function(controller) {
                 // assuming data is not in my db ->
                 // save the room data marked as inactive, save persons in the room
 
-                bot.reply(message, 'Olá 👋  \nEu sou o Bear, um bot de sala de aula!  \n'
+                bot.reply(message, 'Olá 👋  \nEu sou o Educ, um bot de sala de aula!  \n'
                     + 'Digite `Oi`  em uma **mensagem direta** para falar comigo');
 
                 var creatorId = details.creatorId;

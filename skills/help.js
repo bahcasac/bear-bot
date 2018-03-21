@@ -22,7 +22,7 @@ module.exports = function(controller) {
                 }
 
                 if(teacher>0) {
-                    bot.reply(message, "Aqui está uma lista completa de ações **para Professores**:  \n"
+                    bot.reply(message, "Aqui está uma lista de ações **para Professores**:  \n"
 
                     + "**Atividade extra-classe**  \n"
                     + "-`enviar/apagar atividade extra-classe`: Para enviar ou apagar uma atividade já enviada  \n"
@@ -67,8 +67,8 @@ module.exports = function(controller) {
                     + "-`resultado`: Gerar resultado de uma pergunta ativa  \n"
 
                     + "**Configurações**  \n"
-                    + "-`enviar fuso horário`: Enviar um fuso-horário, todas as consultas e lembretes vão disparar de acordo com isso.  \n"
-                    + "-`fuso horário`: Exibir o fuso-horário atual  \n"
+                    + "-`enviar fuso horário`: Enviar um fuso horário, todas as consultas e lembretes vão disparar de acordo com isso.  \n"
+                    + "-`fuso horário`: Exibir o fuso horário atual  \n"
                     + "-`tornar administrador`: Dar a alguém o privilégio de administrador (usar o e-mail)  \n"
                     + "-`remover administrador`: Remover o privilégio de administrador (usar o e-mail)   \n"
                     + "-`administrador`: Visualizar o próprio status de admin  \n"
@@ -76,22 +76,22 @@ module.exports = function(controller) {
                     );
                 }
                 if(student>0) {
-                    bot.reply(message, "Aqui está a lista de ações suportadas **para estudantes**:  \n"
+                    bot.reply(message, "Aqui está a lista de ações **para estudantes**:  \n"
 
                     + "**Atividades Extra-classe**  \n"
-                    + "-`Atividade Extra-classe`: Para visualizar as informações  \n"
+                    + "-`atividade extra-classe`: Para visualizar as informações  \n"
 
                     + "**Site para a Sala de Aula**  \n"
                     + "-`site`: Para visualizar as informações  \n"
 
                     + "**Links para Resumo**  \n"
-                    + "-`Resumo`: Para visualizar link de resumo  \n"
+                    + "-`resumo`: Para visualizar link de resumo  \n"
 
                     + "**Links para Estudo**  \n"
                     + "-`estudos`: Para visualizar os links para estudo  \n"
 
                     + "**Fuso Horário**  \n"
-                    + "-`Fuso horário`: Oara visualizar o fuso horário atual  \n"
+                    + "-`fuso horário`: Oara visualizar o fuso horário atual  \n"
 
 
 
