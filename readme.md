@@ -3,7 +3,7 @@
 ### Get Started
 
 1. Clone this repository:  
-`git clone https://github.com/mehamasum/bear-bot`
+`git@github.com:bahcasac/bear-bot.git`
 
 2. Install dependencies:  
 ```
