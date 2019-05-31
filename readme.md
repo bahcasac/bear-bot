@@ -1,4 +1,4 @@
-# Bear: The Classroom Bot for Cisco Spark
+# Bear: The Classroom Bot for Cisco Webex Teams
 
 ### Get Started
 
